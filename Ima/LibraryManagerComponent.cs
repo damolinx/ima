@@ -1,88 +1,81 @@
-using System;
-using System.IO;
-using System.Data;
-using System.Text;
-using System.Drawing;
-using System.Collections;
-using System.Windows.Forms;
-using System.ComponentModel;
-
 using Ima.Library;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Ima
 {
-	/// <summary>
-	/// Notification
-	/// </summary>
-	public delegate void OpenLibraryItemEventHandler(object sender, OpenLibraryEventArgs e);
+    /// <summary>
+    /// Notification
+    /// </summary>
+    public delegate void OpenLibraryItemEventHandler(object sender, OpenLibraryEventArgs e);
 
-	/// <summary>
-	/// Summary description for LibraryManagerComponent.
-	/// </summary>
-	public class LibraryManagerComponent : Ima.GenericComponent
-	{
-		private System.Windows.Forms.TreeView libTree;
-		private System.Windows.Forms.Label lblTitle;
-		private System.Windows.Forms.ImageList imgLibraryItems;
-		private System.Windows.Forms.ToolBarButton tbBtn_Add;
-		private System.Windows.Forms.ToolBarButton tbBtn_Remove;
-		private System.Windows.Forms.ToolBarButton tbBtn_Separator_1;
-		private System.Windows.Forms.ToolBarButton tbBtn_Properties;
-		private System.ComponentModel.IContainer components;
+    /// <summary>
+    /// Summary description for LibraryManagerComponent.
+    /// </summary>
+    public class LibraryManagerComponent : Ima.GenericComponent
+    {
+        private System.Windows.Forms.TreeView libTree;
+        private System.Windows.Forms.ImageList imgLibraryItems;
+        private System.Windows.Forms.ToolBarButton tbBtn_Add;
+        private System.Windows.Forms.ToolBarButton tbBtn_Remove;
+        private System.Windows.Forms.ToolBarButton tbBtn_Separator_1;
+        private System.Windows.Forms.ToolBarButton tbBtn_Properties;
+        private System.ComponentModel.IContainer components;
 
-		/// <summary>
-		/// Stores a reference to manager
-		/// </summary>
-		LibraryManager manager;
+        /// <summary>
+        /// Stores a reference to manager
+        /// </summary>
+        LibraryManager manager;
 
-		#region Constructor
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public LibraryManagerComponent() : this(null)
-		{
-		}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public LibraryManagerComponent()
+            : this(null)
+        {
+        }
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public LibraryManagerComponent(LibraryManager library)
-		{
-			// This call is required by the Windows.Forms Form Designer.
-			InitializeComponent();			
-			
-			// Load Library
-			this.Manager = library;
-		}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public LibraryManagerComponent(LibraryManager library)
+        {
+            // This call is required by the Windows.Forms Form Designer.
+            InitializeComponent();
 
-		/// <summary> 
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
-		#endregion
+            // Load Library
+            this.Manager = library;
+        }
 
-		#region Component Designer generated code
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibraryManagerComponent));
             this.imgLibraryItems = new System.Windows.Forms.ImageList(this.components);
             this.libTree = new System.Windows.Forms.TreeView();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.tbBtn_Add = new System.Windows.Forms.ToolBarButton();
             this.tbBtn_Remove = new System.Windows.Forms.ToolBarButton();
             this.tbBtn_Separator_1 = new System.Windows.Forms.ToolBarButton();
@@ -94,8 +87,7 @@ namespace Ima
             // panel
             // 
             this.panel.Controls.Add(this.libTree);
-            this.panel.Location = new System.Drawing.Point(0, 16);
-            this.panel.Size = new System.Drawing.Size(192, 404);
+            this.panel.Size = new System.Drawing.Size(192, 400);
             // 
             // imageList
             // 
@@ -118,8 +110,8 @@ namespace Ima
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 420);
-            this.bottomPanel.Size = new System.Drawing.Size(192, 28);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 400);
+            this.bottomPanel.Size = new System.Drawing.Size(192, 48);
             // 
             // imgLibraryItems
             // 
@@ -144,21 +136,10 @@ namespace Ima
             this.libTree.Location = new System.Drawing.Point(0, 0);
             this.libTree.Name = "libTree";
             this.libTree.SelectedImageIndex = 0;
-            this.libTree.Size = new System.Drawing.Size(192, 404);
+            this.libTree.Size = new System.Drawing.Size(192, 400);
             this.libTree.TabIndex = 0;
-            this.libTree.DoubleClick += new System.EventHandler(this.libTree_DoubleClick);
             this.libTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.libTree_AfterSelect);
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(0, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(192, 16);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Photo Library";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.libTree.Click += new System.EventHandler(this.libTree_Click);
             // 
             // tbBtn_Add
             // 
@@ -184,305 +165,263 @@ namespace Ima
             // 
             // LibraryManagerComponent
             // 
-            this.Controls.Add(this.lblTitle);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(168F, 168F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Name = "LibraryManagerComponent";
             this.Size = new System.Drawing.Size(192, 448);
-            this.Controls.SetChildIndex(this.bottomPanel, 0);
-            this.Controls.SetChildIndex(this.lblTitle, 0);
-            this.Controls.SetChildIndex(this.panel, 0);
             this.panel.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
             this.bottomPanel.PerformLayout();
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Properties
-		/// <summary>
-		/// Library Manager
-		/// </summary>
-		public LibraryManager Manager
-		{
-			get
-			{
-				return this.manager;
-			}
+        #region Properties
+        /// <summary>
+        /// Library Manager
+        /// </summary>
+        public LibraryManager Manager
+        {
+            get
+            {
+                return this.manager;
+            }
 
-			set
-			{
-				//Clean previous
-				if (this.manager != null)
-				{
-					this.manager.AddedLibraryItem   -= new OnLibraryItemEventHandler(this.manager_AddedLibraryItem);
-					this.manager.RemovedLibraryItem -= new OnLibraryItemEventHandler(this.manager_RemovedLibraryItem);
-					this.libTree.Nodes.Clear();
-				}
+            set
+            {
+                //Clean previous
+                if (this.manager != null)
+                {
+                    this.manager.AddedLibraryItem -= new OnLibraryItemEventHandler(this.manager_AddedLibraryItem);
+                    this.manager.RemovedLibraryItem -= new OnLibraryItemEventHandler(this.manager_RemovedLibraryItem);
+                    this.libTree.Nodes.Clear();
+                }
 
-				//Set new value
-				this.manager = value;
-				
-				//Process pre-existing
-				if (this.manager != null)
-				{
-					this.manager.AddedLibraryItem   += new OnLibraryItemEventHandler(manager_AddedLibraryItem);
-					this.manager.RemovedLibraryItem += new OnLibraryItemEventHandler(manager_RemovedLibraryItem);
-					foreach(LibraryItem item in this.manager.Items)
-					{
-						this.AddItem(item);
-					}
-				}
-			}
-		}
-		#endregion
+                //Set new value
+                this.manager = value;
 
-		#region Methods
-		/// <summary>
-		/// Adds Node
-		/// </summary>
-		/// <param name="item"></param>
-		protected void AddItem(LibraryItem item)
-		{
-			LibraryItemNode node = new LibraryItemNode(item);
-			foreach(LibraryItem subItem in item.GetLibraryItems(true))
-			{
-				this.AddItem(subItem, node);
-			}
-			this.libTree.Nodes.Add(node);
-		}
+                //Process pre-existing
+                if (this.manager != null)
+                {
+                    this.manager.AddedLibraryItem += new OnLibraryItemEventHandler(manager_AddedLibraryItem);
+                    this.manager.RemovedLibraryItem += new OnLibraryItemEventHandler(manager_RemovedLibraryItem);
+                    foreach (LibraryItem item in this.manager.Items)
+                    {
+                        this.AddItem(item);
+                    }
+                }
+            }
+        }
+        #endregion
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="item"></param>
-		/// <param name="parent"></param>
-		protected void AddItem(LibraryItem item, LibraryItemNode parent)
-		{
-			LibraryItemNode node = new LibraryItemNode(item);
-			foreach(LibraryItem subItem in item.GetLibraryItems(true))
-			{
-				this.AddItem(subItem, node);
-			}
-			parent.Nodes.Add(node);
-		}
+        /// <summary>
+        /// Adds Node
+        /// </summary>
+        /// <param name="item"></param>
+        protected void AddItem(LibraryItem item)
+        {
+            LibraryItemNode node = new LibraryItemNode(item);
+            foreach (LibraryItem subItem in item.GetLibraryItems(true))
+            {
+                this.AddItem(subItem, node);
+            }
+            this.libTree.Nodes.Add(node);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="node"></param>
-		/// <returns></returns>
-		protected bool RemoveItem(LibraryItem item)
-		{
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="parent"></param>
+        protected void AddItem(LibraryItem item, LibraryItemNode parent)
+        {
+            LibraryItemNode node = new LibraryItemNode(item);
+            foreach (LibraryItem subItem in item.GetLibraryItems(true))
+            {
+                this.AddItem(subItem, node);
+            }
+            parent.Nodes.Add(node);
+        }
 
-			foreach(LibraryItemNode node in this.libTree.Nodes)
-			{
-				if (node.LibraryItem == item)
-				{
-					this.libTree.Nodes.Remove(node);
-					return true;
-				}
-			}
-			Console.Out.WriteLine("TODO: Removal of recursive node can't be serialized and therefore is not supported ... yet");
-			return false;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        protected bool RemoveItem(LibraryItem item)
+        {
 
-		#endregion
+            foreach (LibraryItemNode node in this.libTree.Nodes)
+            {
+                if (node.Item == item)
+                {
+                    this.libTree.Nodes.Remove(node);
+                    return true;
+                }
+            }
+            Console.Out.WriteLine("TODO: Removal of recursive node can't be serialized and therefore is not yet supported");
+            return false;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void btnShow_Click(object sender, System.EventArgs e)
-		{
-			LibraryItemNode node = libTree.SelectedNode as LibraryItemNode;
-			if (node != null)
-			{
-				OpenRequestEvent(new OpenLibraryEventArgs(node.LibraryItem));
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnShow_Click(object sender, System.EventArgs e)
+        {
+            if (libTree.SelectedNode is LibraryItemNode node)
+            {
+                OpenRequestEvent(new OpenLibraryEventArgs(node.Item));
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void libTree_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
-		{
-			this.toolBar.Buttons[1].Enabled = libTree.SelectedNode != null
-				&& ((LibraryItemNode)libTree.SelectedNode).LibraryItem.Deletable;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void libTree_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
+        {
+            this.toolBar.Buttons[1].Enabled = libTree.SelectedNode != null
+                && ((LibraryItemNode)libTree.SelectedNode).Item.Deletable;
 
-			this.toolBar.Buttons[3].Enabled = libTree.SelectedNode != null;
-		}
+            this.toolBar.Buttons[3].Enabled = libTree.SelectedNode != null;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void libTree_DoubleClick(object sender, System.EventArgs e)
-		{
-			TreeNode node = libTree.GetNodeAt(libTree.PointToClient( new Point(MousePosition.X, MousePosition.Y)));
-			if (node != null)
-			{
-				if (node != libTree.SelectedNode)
-				{
-					libTree.SelectedNode = node;
-				}
-				btnShow_Click(libTree, EventArgs.Empty);
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void libTree_Click(object sender, System.EventArgs e)
+        {
+            TreeNode node = libTree.GetNodeAt(libTree.PointToClient(new Point(MousePosition.X, MousePosition.Y)));
+            if (node != null)
+            {
+                if (node != libTree.SelectedNode)
+                {
+                    libTree.SelectedNode = node;
+                }
+                btnShow_Click(libTree, EventArgs.Empty);
+            }
+        }
 
-		#region Event Handling
-		
-		/// <summary>
-		/// Event fired when any of the layers changed
-		/// </summary>
-		public event OpenLibraryItemEventHandler OpenLibrary;
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
-		protected virtual void OpenRequestEvent(OpenLibraryEventArgs e) 
-		{
-			if (OpenLibrary != null)
-				OpenLibrary(this, e);
-		}
+        /// <summary>
+        /// Event fired when any of the layers changed
+        /// </summary>
+        public event OpenLibraryItemEventHandler OpenLibrary;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="args"></param>
-		private void manager_AddedLibraryItem(object sender, LibraryManagerEventArgs args)
-		{
-			if (args.Item == this.manager.MyPictures)
-			{
-				this.manager.MyPictures.ImageIndex = 1;	//TODO:  Lookup?
-			}
-			else if (args.Item == this.manager.SharedPictures)
-			{
-				this.manager.SharedPictures.ImageIndex = 2;  //TODO: Lookup?
-			}
-			this.AddItem(args.Item);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OpenRequestEvent(OpenLibraryEventArgs e)
+        {
+            OpenLibrary?.Invoke(this, e);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="args"></param>
-		private void manager_RemovedLibraryItem(object sender, LibraryManagerEventArgs args)
-		{
-			this.RemoveItem(args.Item);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void manager_AddedLibraryItem(object sender, LibraryManagerEventArgs args)
+        {
+            if (args.Item == this.manager.MyPictures)
+            {
+                this.manager.MyPictures.ImageIndex = 1; //TODO:  Lookup?
+            }
+            else if (args.Item == this.manager.SharedPictures)
+            {
+                this.manager.SharedPictures.ImageIndex = 2;  //TODO: Lookup?
+            }
+            this.AddItem(args.Item);
+        }
 
-		#endregion
+        private void manager_RemovedLibraryItem(object sender, LibraryManagerEventArgs args)
+        {
+            this.RemoveItem(args.Item);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void toolBar_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
-		{
-			LibraryItemNode node;
-			switch(toolBar.Buttons.IndexOf(e.Button))
-			{
-				case 0:
-					FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
-					if (folderBrowser.ShowDialog() == DialogResult.OK)
-					{
-						LibraryItemForm libItemDialog = new LibraryItemForm(Path.GetFileNameWithoutExtension(folderBrowser.SelectedPath), folderBrowser.SelectedPath);
-						libItemDialog.ImageList       = this.imgLibraryItems;
+        private void toolBar_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
+        {
+            LibraryItemNode node;
+            switch (toolBar.Buttons.IndexOf(e.Button))
+            {
+                case 0:
+                    FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+                    if (folderBrowser.ShowDialog() == DialogResult.OK)
+                    {
+                        var item = new FileLibraryItem(Path.GetFileName(folderBrowser.SelectedPath), folderBrowser.SelectedPath)
+                        {
+                            Deletable = true,
+                            Recursive = true,
+                            Visible = true,
+                            Editable = true,
+                            ImageIndex = 0,
+                        };
 
-						if (libItemDialog.ShowDialog(this) == DialogResult.OK)
-						{
-							LibraryItem item = new FileLibraryItem(libItemDialog.ItemName, libItemDialog.ItemPath);
-							item.Recursive   = libItemDialog.ItemRecursive;
-							item.ImageIndex  = libItemDialog.ImageIndex;
-							this.Manager.AddItem(item);
-						}
-					}
-					break;
-				case 1:
-					node = this.libTree.SelectedNode as LibraryItemNode;
-					this.RemoveItem(node.LibraryItem);
-					break;
-				case 3:
-					break;
-			}
-		}
-	}
+                        this.Manager.AddItem(item);
+                    }
+                    break;
+                case 1:
+                    node = (LibraryItemNode)this.libTree.SelectedNode;
+                    this.RemoveItem(node.Item);
+                    break;
+                case 3:
+                    break;
+            }
+        }
+    }
 
-	/// <summary>
-	/// Event arguments
-	/// </summary>
-	public class OpenLibraryEventArgs : EventArgs
-	{
-		LibraryItem item;
+    /// <summary>
+    /// Event arguments
+    /// </summary>
+    public class OpenLibraryEventArgs : EventArgs
+    {
+        public OpenLibraryEventArgs(LibraryItem item)
+        {
+            this.Item = item;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public OpenLibraryEventArgs(LibraryItem item)
-		{
-			this.item = item;
-		}
+        public LibraryItem Item
+        {
+            get; private set;
+        }
+    }
 
-		public LibraryItem Item
-		{
-			get
-			{
-				return item;
-			}
-		}
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class LibraryItemNode : TreeNode
+    {
+        public LibraryItemNode(LibraryItem item)
+        {
+            this.Item = item;
+            this.Text = item.Name;
+            this.ImageIndex = item.ImageIndex;
+            this.SelectedImageIndex = item.ImageIndex;
+        }
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public class LibraryItemNode : TreeNode
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		LibraryItem item;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string LibraryItemPath
+        {
+            get
+            {
+                return (Item as FileLibraryItem)?.Path ?? string.Empty;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="path"></param>
-		public LibraryItemNode(LibraryItem item)
-		{
-			this.item               = item;
-			this.Text               = this.item.Name;
-			this.ImageIndex         = this.item.ImageIndex;
-			this.SelectedImageIndex = this.item.ImageIndex;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public string LibraryItemPath
-		{
-			get
-			{
-				FileLibraryItem fileItem = this.item as FileLibraryItem;
-				return (fileItem == null ) ? string.Empty : fileItem.Path;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public LibraryItem LibraryItem
-		{
-			get
-			{
-				return this.item;
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public LibraryItem Item
+        {
+            get; private set;
+        }
+    }
 }

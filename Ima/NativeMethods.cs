@@ -1,6 +1,6 @@
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Ima
 {
@@ -15,8 +15,7 @@ namespace Ima
         /// Native call
         /// </summary>
         [DllImport("shell32.dll")]
-        public static extern bool SHGetSpecialFolderPath(IntPtr hwndOwner, [Out]
-            StringBuilder lpszPath, int nFolder, bool fCreate);
+        public static extern bool SHGetSpecialFolderPath(IntPtr hwndOwner, [Out]StringBuilder lpszPath, int nFolder, bool fCreate);
 
         /// <summary>
         /// Constant for SystemParametersInfo
@@ -33,6 +32,9 @@ namespace Ima
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+
+        [DllImport("user32.dll")]
+        public static extern bool SetProcessDPIAware();
 
         // Performs an operation on a specified file.
         [DllImport("shell32.dll")]
@@ -99,7 +101,7 @@ namespace Ima
 
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-         public static extern int SendMessage(IntPtr handle, int msg, IntPtr wparam, IntPtr lparam);
+        public static extern int SendMessage(IntPtr handle, int msg, IntPtr wparam, IntPtr lparam);
 
         /// <summary>
         /// 
@@ -122,33 +124,33 @@ namespace Ima
         }
 
         // Common verbs
-        public static readonly string SHEXEC_OpenFile = "open";
+        public const string SHEXEC_OpenFile = "open";
         // Opens the file specified by the 
         // lpFile parameter. The file can 
         // be an executable file, a document 
         // file, or a folder.
 
-        public static readonly string SHEXEC_EditFile = "edit";
+        public const string SHEXEC_EditFile = "edit";
         // Launches an editor and opens the 
         // document for editing. If lpFile 
         // is not a document file, the 
         // function will fail.
 
-        public static readonly string SHEXEC_ExploreFolder = "explore";
+        public const string SHEXEC_ExploreFolder = "explore";
         // Explores the folder specified by 
         // lpFile.
 
-        public static readonly string SHEXEC_FindInFolder = "find";
+        public const string SHEXEC_FindInFolder = "find";
         // Initiates a search starting from 
         // the specified directory.
 
-        public static readonly string SHEXEC_PrintFile = "print";
+        public const string SHEXEC_PrintFile = "print";
         // Prints the document file specified 
         // by lpFile. If lpFile is not a 
         // document file, the function will 
         // fail.
 
-        public static void PrintFiles(string[] files)
+        public static void PrintFiles(params string[] files)
         {
             try
             {

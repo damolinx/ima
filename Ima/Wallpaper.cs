@@ -1,9 +1,10 @@
+using Microsoft.Win32;
 using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
-using System.Drawing;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace Ima
 {
@@ -12,8 +13,6 @@ namespace Ima
     /// </summary>
     public class WallpaperDialog : Ima.Controls.ToolForm
     {
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.RadioButton rbtnCentered;
         private System.Windows.Forms.RadioButton rBtnTiled;
         private System.Windows.Forms.RadioButton rBtnStretched;
@@ -29,17 +28,11 @@ namespace Ima
         private System.Windows.Forms.GroupBox groupBoxStyle;
         private System.Windows.Forms.PictureBox pictureBox;
 
-        /// <summary>
-        /// 
-        /// </summary>
         private LibraryItem item;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public WallpaperDialog() : this(null)
+        public WallpaperDialog()
+            : this(null)
         {
-
         }
 
         /// <summary>
@@ -58,9 +51,7 @@ namespace Ima
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(WallpaperDialog));
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WallpaperDialog));
             this.groupBoxStyle = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.imgLstWallpaper = new System.Windows.Forms.ImageList(this.components);
@@ -75,33 +66,14 @@ namespace Ima
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBoxStyle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(290, 362);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnOK
-            // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(202, 362);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.TabIndex = 1;
-            this.btnOK.Text = "&OK";
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
             // groupBoxStyle
             // 
-            this.groupBoxStyle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxStyle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxStyle.Controls.Add(this.label1);
             this.groupBoxStyle.Controls.Add(this.rBtnCenteredAdjusted);
             this.groupBoxStyle.Controls.Add(this.lblTiled);
@@ -110,9 +82,9 @@ namespace Ima
             this.groupBoxStyle.Controls.Add(this.rBtnStretched);
             this.groupBoxStyle.Controls.Add(this.rBtnTiled);
             this.groupBoxStyle.Controls.Add(this.rbtnCentered);
-            this.groupBoxStyle.Location = new System.Drawing.Point(8, 234);
+            this.groupBoxStyle.Location = new System.Drawing.Point(14, 380);
             this.groupBoxStyle.Name = "groupBoxStyle";
-            this.groupBoxStyle.Size = new System.Drawing.Size(362, 112);
+            this.groupBoxStyle.Size = new System.Drawing.Size(908, 190);
             this.groupBoxStyle.TabIndex = 2;
             this.groupBoxStyle.TabStop = false;
             this.groupBoxStyle.Text = "Style";
@@ -121,23 +93,24 @@ namespace Ima
             // 
             this.label1.ImageIndex = 0;
             this.label1.ImageList = this.imgLstWallpaper;
-            this.label1.Location = new System.Drawing.Point(16, 72);
+            this.label1.Location = new System.Drawing.Point(29, 122);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 24);
+            this.label1.Size = new System.Drawing.Size(57, 40);
             this.label1.TabIndex = 8;
             // 
             // imgLstWallpaper
             // 
-            this.imgLstWallpaper.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imgLstWallpaper.ImageSize = new System.Drawing.Size(32, 32);
             this.imgLstWallpaper.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgLstWallpaper.ImageStream")));
             this.imgLstWallpaper.TransparentColor = System.Drawing.Color.White;
+            this.imgLstWallpaper.Images.SetKeyName(0, "");
+            this.imgLstWallpaper.Images.SetKeyName(1, "");
+            this.imgLstWallpaper.Images.SetKeyName(2, "");
             // 
             // rBtnCenteredAdjusted
             // 
-            this.rBtnCenteredAdjusted.Location = new System.Drawing.Point(64, 72);
+            this.rBtnCenteredAdjusted.Location = new System.Drawing.Point(115, 122);
             this.rBtnCenteredAdjusted.Name = "rBtnCenteredAdjusted";
-            this.rBtnCenteredAdjusted.Size = new System.Drawing.Size(152, 24);
+            this.rBtnCenteredAdjusted.Size = new System.Drawing.Size(274, 40);
             this.rBtnCenteredAdjusted.TabIndex = 7;
             this.rBtnCenteredAdjusted.Text = "Centered (&fit to screen)";
             // 
@@ -146,9 +119,9 @@ namespace Ima
             this.lblTiled.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTiled.ImageIndex = 2;
             this.lblTiled.ImageList = this.imgLstWallpaper;
-            this.lblTiled.Location = new System.Drawing.Point(225, 72);
+            this.lblTiled.Location = new System.Drawing.Point(533, 122);
             this.lblTiled.Name = "lblTiled";
-            this.lblTiled.Size = new System.Drawing.Size(32, 24);
+            this.lblTiled.Size = new System.Drawing.Size(58, 40);
             this.lblTiled.TabIndex = 6;
             // 
             // lblStretched
@@ -156,44 +129,44 @@ namespace Ima
             this.lblStretched.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblStretched.ImageIndex = 1;
             this.lblStretched.ImageList = this.imgLstWallpaper;
-            this.lblStretched.Location = new System.Drawing.Point(225, 24);
+            this.lblStretched.Location = new System.Drawing.Point(533, 41);
             this.lblStretched.Name = "lblStretched";
-            this.lblStretched.Size = new System.Drawing.Size(32, 24);
+            this.lblStretched.Size = new System.Drawing.Size(58, 40);
             this.lblStretched.TabIndex = 5;
             // 
             // lblCentered
             // 
             this.lblCentered.ImageIndex = 0;
             this.lblCentered.ImageList = this.imgLstWallpaper;
-            this.lblCentered.Location = new System.Drawing.Point(16, 24);
+            this.lblCentered.Location = new System.Drawing.Point(29, 41);
             this.lblCentered.Name = "lblCentered";
-            this.lblCentered.Size = new System.Drawing.Size(32, 24);
+            this.lblCentered.Size = new System.Drawing.Size(57, 40);
             this.lblCentered.TabIndex = 4;
             // 
             // rBtnStretched
             // 
             this.rBtnStretched.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.rBtnStretched.Location = new System.Drawing.Point(273, 24);
+            this.rBtnStretched.Location = new System.Drawing.Point(619, 41);
             this.rBtnStretched.Name = "rBtnStretched";
-            this.rBtnStretched.Size = new System.Drawing.Size(72, 24);
+            this.rBtnStretched.Size = new System.Drawing.Size(130, 40);
             this.rBtnStretched.TabIndex = 3;
             this.rBtnStretched.Text = "&Stretched";
             // 
             // rBtnTiled
             // 
             this.rBtnTiled.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.rBtnTiled.Location = new System.Drawing.Point(273, 72);
+            this.rBtnTiled.Location = new System.Drawing.Point(619, 122);
             this.rBtnTiled.Name = "rBtnTiled";
-            this.rBtnTiled.Size = new System.Drawing.Size(56, 24);
+            this.rBtnTiled.Size = new System.Drawing.Size(101, 40);
             this.rBtnTiled.TabIndex = 2;
             this.rBtnTiled.Text = "&Tiled";
             // 
             // rbtnCentered
             // 
             this.rbtnCentered.Checked = true;
-            this.rbtnCentered.Location = new System.Drawing.Point(64, 24);
+            this.rbtnCentered.Location = new System.Drawing.Point(115, 41);
             this.rbtnCentered.Name = "rbtnCentered";
-            this.rbtnCentered.Size = new System.Drawing.Size(152, 24);
+            this.rbtnCentered.Size = new System.Drawing.Size(274, 40);
             this.rbtnCentered.TabIndex = 0;
             this.rbtnCentered.TabStop = true;
             this.rbtnCentered.Text = "&Centered";
@@ -202,9 +175,9 @@ namespace Ima
             // 
             this.pictureBox.BackColor = System.Drawing.SystemColors.Desktop;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Location = new System.Drawing.Point(8, 8);
+            this.pictureBox.Location = new System.Drawing.Point(14, 14);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(240, 180);
+            this.pictureBox.Size = new System.Drawing.Size(432, 304);
             this.pictureBox.TabIndex = 3;
             this.pictureBox.TabStop = false;
             // 
@@ -215,9 +188,9 @@ namespace Ima
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.pictureBox);
             this.panel1.Enabled = false;
-            this.panel1.Location = new System.Drawing.Point(61, 16);
+            this.panel1.Location = new System.Drawing.Point(237, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(256, 208);
+            this.panel1.Size = new System.Drawing.Size(461, 352);
             this.panel1.TabIndex = 4;
             // 
             // panel2
@@ -225,37 +198,29 @@ namespace Ima
             this.panel2.BackColor = System.Drawing.Color.Lime;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Enabled = false;
-            this.panel2.Location = new System.Drawing.Point(216, 192);
+            this.panel2.Location = new System.Drawing.Point(389, 325);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(16, 8);
+            this.panel2.Size = new System.Drawing.Size(29, 13);
             this.panel2.TabIndex = 4;
             // 
             // WallpaperDialog
             // 
-            this.AcceptButton = this.btnOK;
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(378, 400);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(168F, 168F);
+            this.ClientSize = new System.Drawing.Size(936, 661);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBoxStyle);
-            this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.btnCancel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
             this.Name = "WallpaperDialog";
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Wallpaper";
+            this.Controls.SetChildIndex(this.groupBoxStyle, 0);
+            this.Controls.SetChildIndex(this.panel1, 0);
             this.groupBoxStyle.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnOK_Click(object sender, System.EventArgs e)
+        protected override void Apply()
         {
             if (this.item == null)
                 return;
@@ -286,16 +251,6 @@ namespace Ima
             }
             this.Close();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCancel_Click(object sender, System.EventArgs e)
-        {
-            this.Close();
-        }
     }
 
     /// <summary>
@@ -303,58 +258,47 @@ namespace Ima
     /// </summary>
     public sealed class Wallpaper
     {
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public enum Style : int
+        public enum Style
         {
             Tiled,
             Centered,
             Stretched
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private Wallpaper() { }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="style"></param>
         public static void Set(Uri uri, Style style)
         {
-            System.IO.Stream s = new WebClient().OpenRead(uri.ToString());
-
-            System.Drawing.Image img = System.Drawing.Image.FromStream(s);
-            string tempPath = Path.Combine(Configuration.Instance.Path_Library_Base, "ima.bmp");
-            img.Save(tempPath, System.Drawing.Imaging.ImageFormat.Bmp);
-
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
-            if (style == Style.Stretched)
+            using (var s = new WebClient().OpenRead(uri.ToString()))
             {
-                key.SetValue(@"WallpaperStyle", 2.ToString());
-                key.SetValue(@"TileWallpaper", 0.ToString());
-            }
+                var img = Image.FromStream(s);
+                string tempPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "ima.bmp");
+                img.Save(tempPath, ImageFormat.Bmp);
 
-            if (style == Style.Centered)
-            {
-                key.SetValue(@"WallpaperStyle", 1.ToString());
-                key.SetValue(@"TileWallpaper", 0.ToString());
-            }
+                var key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+                if (style == Style.Stretched)
+                {
+                    key.SetValue(@"WallpaperStyle", 2.ToString());
+                    key.SetValue(@"TileWallpaper", 0.ToString());
+                }
 
-            if (style == Style.Tiled)
-            {
-                key.SetValue(@"WallpaperStyle", 1.ToString());
-                key.SetValue(@"TileWallpaper", 1.ToString());
-            }
+                if (style == Style.Centered)
+                {
+                    key.SetValue(@"WallpaperStyle", 1.ToString());
+                    key.SetValue(@"TileWallpaper", 0.ToString());
+                }
 
-            NativeMethods.SystemParametersInfo(NativeMethods.SPI_SETDESKWALLPAPER,
-                0,
-                tempPath,
-                NativeMethods.SPIF_UPDATEINIFILE | NativeMethods.SPIF_SENDWININICHANGE);
+                if (style == Style.Tiled)
+                {
+                    key.SetValue(@"WallpaperStyle", 1.ToString());
+                    key.SetValue(@"TileWallpaper", 1.ToString());
+                }
+
+                NativeMethods.SystemParametersInfo(NativeMethods.SPI_SETDESKWALLPAPER,
+                    0,
+                    tempPath,
+                    NativeMethods.SPIF_UPDATEINIFILE | NativeMethods.SPIF_SENDWININICHANGE);
+            }
         }
     }
 }

@@ -17,30 +17,11 @@ namespace Ima
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		int progressMin = 0;
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		int progressMax = 0;
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		int current     = 0;
-
-		/// <summary>
-		/// 
-		/// </summary>
+		private int progressMin;
+        private int progressMax;
+        private int current;
 		private Ima.Controls.ZoomControl zoomControl;
-
-		/// <summary>
-		/// 
-		/// </summary>
-		string msg = string.Empty;
+        private string msg;
 
 		/// <summary>
 		/// 
@@ -76,46 +57,40 @@ namespace Ima
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.zoomControl = new Ima.Controls.ZoomControl();
-			this.SuspendLayout();
-			// 
-			// zoomControl
-			// 
-			this.zoomControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Right)));
-			this.zoomControl.Location = new System.Drawing.Point(344, 0);
-			this.zoomControl.Name = "zoomControl";
-			this.zoomControl.Size = new System.Drawing.Size(168, 32);
-			this.zoomControl.TabIndex = 0;
-			// 
-			// NotificationComponent
-			// 
-			this.Controls.Add(this.zoomControl);
-			this.Name = "NotificationComponent";
-			this.Size = new System.Drawing.Size(512, 32);
-			this.Paint += new System.Windows.Forms.PaintEventHandler(this.NotificationComponent_Paint);
-			this.ResumeLayout(false);
+            this.zoomControl = new Ima.Controls.ZoomControl();
+            this.SuspendLayout();
+            // 
+            // zoomControl
+            // 
+            this.zoomControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.zoomControl.Location = new System.Drawing.Point(132, 0);
+            this.zoomControl.Name = "zoomControl";
+            this.zoomControl.Size = new System.Drawing.Size(380, 32);
+            this.zoomControl.TabIndex = 0;
+            this.zoomControl.Tooltip = "";
+            this.zoomControl.ZoomMax = 10;
+            this.zoomControl.ZoomMin = 0;
+            this.zoomControl.ZoomValue = 0;
+            // 
+            // NotificationComponent
+            // 
+            this.Controls.Add(this.zoomControl);
+            this.Name = "NotificationComponent";
+            this.Size = new System.Drawing.Size(512, 32);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.NotificationComponent_Paint);
+            this.ResumeLayout(false);
 
 		}
 		#endregion
 
 		#region IStatusNotification Members
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="msg"></param>
-		public void StatusMessage(string msg)
+	    public void StatusMessage(string msg)
 		{
 			this.msg = msg;
 			this.Invalidate();
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="start"></param>
-		/// <param name="end"></param>
 		public void StartProgress(int start, int end)
 		{
 			this.progressMin = start;
@@ -124,9 +99,6 @@ namespace Ima
 			this.Invalidate(new Rectangle(0, 0, this.Width, 6));
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
 		public void EndProgress()
 		{
 			this.progressMin = 0;
@@ -134,9 +106,6 @@ namespace Ima
 			this.Invalidate(new Rectangle(0, 0, this.Width, 6));
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
 		public int Progress
 		{
 			get
@@ -150,9 +119,6 @@ namespace Ima
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
 		public bool ZoomEnable
 		{
 			get

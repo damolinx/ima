@@ -19,7 +19,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Ima</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <StartupObject>Ima.MainClass</StartupObject>
+    <StartupObject>Ima.Program</StartupObject>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -92,18 +92,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement">
-      <Name>Microsoft.ApplicationBlocks.ConfigurationManagement</Name>
-      <HintPath>Microsoft.ApplicationBlocks.ConfigurationManagement.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces">
-      <Name>Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces</Name>
-      <HintPath>Microsoft.ApplicationBlocks.ConfigurationManagement.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationBlocks.Data">
-      <Name>Microsoft.ApplicationBlocks.Data</Name>
-      <HintPath>Microsoft.ApplicationBlocks.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -138,14 +126,42 @@
     <Compile Include="AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AssemblyInfo.cs">
+    <Compile Include="Controls\ActivePreviewWindow.Designer.cs">
+      <DependentUpon>ActivePreviewWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PreviewToolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\PreviewToolForm.Designer.cs">
+      <DependentUpon>PreviewToolForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ThumbnailForm.Designer.cs">
+      <DependentUpon>ThumbnailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToolForm.Designer.cs">
+      <DependentUpon>ToolForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageOps\FilterBase.cs" />
+    <Compile Include="ImageOps\Filters\DisplacementFilters.cs" />
+    <Compile Include="ImageOps\Filters\DrawingFilters.cs" />
+    <Compile Include="ImageOps\Filters\HistogramRetriever.cs" />
+    <Compile Include="ImageOps\Filters\KernelFilters.cs" />
+    <Compile Include="ImageOps\Filters\PixelFilters.cs" />
+    <Compile Include="ImageOps\ImageChangedEventArgs.cs" />
+    <Compile Include="ImageOps\ImageUtilities.cs" />
+    <Compile Include="ImageOps\IndirectFilterGetDelegate.cs" />
+    <Compile Include="ImageOps\PixelData.cs" />
+    <Compile Include="ImageOps\ThresholdFilterBase.cs" />
+    <Compile Include="Controls\Library\FileLibraryItem.cs" />
+    <Compile Include="Controls\Library\LibraryManagerEventArgs.cs" />
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BasicFilterWindow.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Configuration.cs">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\ActivePreviewWindow.cs">
       <SubType>Form</SubType>
@@ -161,9 +177,6 @@
     </Compile>
     <Compile Include="Controls\LibraryListView.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\PreviewForm.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controls\ThumbnailForm.cs">
       <SubType>Form</SubType>
@@ -183,7 +196,7 @@
     <Compile Include="ImageComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ImageWrapper.cs">
+    <Compile Include="ImageOps\ImageWrapper.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IStatusNotification.cs">
@@ -192,19 +205,13 @@
     <Compile Include="LibraryComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LibraryItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="LibraryManagerComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Library\LibraryItem.cs">
+    <Compile Include="Controls\Library\LibraryItem.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Library\LibraryManager.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="Controls\Library\LibraryManager.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -216,7 +223,19 @@
     <Compile Include="NotificationComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="StretchResizeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OffsetWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FilterPropertyWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ThresholdWindow.cs">
@@ -225,9 +244,7 @@
     <Compile Include="UndoManager.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="ViewMode.cs" />
     <Compile Include="Wallpaper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,8 +269,11 @@
     <EmbeddedResource Include="Controls\LibraryListView.resx">
       <DependentUpon>LibraryListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\PreviewForm.resx">
-      <DependentUpon>PreviewForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\PreviewToolForm.resx">
+      <DependentUpon>PreviewToolForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ThumbnailForm.resx">
+      <DependentUpon>ThumbnailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ToolForm.resx">
       <DependentUpon>ToolForm.cs</DependentUpon>
@@ -274,9 +294,6 @@
     <EmbeddedResource Include="LibraryComponent.resx">
       <DependentUpon>LibraryComponent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LibraryItemForm.resx">
-      <DependentUpon>LibraryItemForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="LibraryManagerComponent.resx">
       <DependentUpon>LibraryManagerComponent.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -291,14 +308,18 @@
     <EmbeddedResource Include="StretchResizeWindow.resx">
       <DependentUpon>StretchResizeWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThresholdWindow.resx">
-      <DependentUpon>ThresholdWindow.cs</DependentUpon>
+    <EmbeddedResource Include="FilterPropertyWindow.resx">
+      <DependentUpon>FilterPropertyWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Wallpaper.resx">
       <DependentUpon>Wallpaper.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <Content Include="App.ico" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -307,6 +328,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

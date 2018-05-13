@@ -1,224 +1,143 @@
-using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Collections;
 
 namespace Ima
 {
-	/// <summary>
-	/// Undo Manager
-	/// </summary>
-	class UndoManager
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		private int pendingChanges = 0;
+    /// <summary>
+    /// Undo Manager
+    /// </summary>
+    class UndoManager
+    {
+        /// <summary>
+        /// Stack Depth
+        /// </summary>
+        private const int Depth = 10;
 
-		/// <summary>
-		/// Stack Depth
-		/// </summary>
-		private static int depth = 10;
-		
-		/// <summary>
-		/// Avoids the recording of Undo/Redo pairs
-		/// </summary>
-		private bool locked = false;
-		
-		/// <summary>
-		/// Undo stack
-		/// </summary>
-		Stack undo = new Stack(depth);
-		
-		/// <summary>
-		/// Redo Stack
-		/// </summary>
-		Stack redo = new Stack(depth);
+        private int _pendingChanges;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void ResetPending()
-		{
-			this.pendingChanges = 0;
-		}
+        /// <summary>
+        /// Undo stack
+        /// </summary>
+        private readonly Stack<NamedPair> _undo = new Stack<NamedPair>(Depth);
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public bool PendingChanges()
-		{
-			return this.pendingChanges > 0;
-		}
+        /// <summary>
+        /// Redo Stack
+        /// </summary>
+        private readonly Stack<NamedPair> _redo = new Stack<NamedPair>(Depth);
 
-		/// <summary>
-		/// Stores an Undo pair
-		/// </summary>
-		/// <param name="name"></param>
-		/// <param name="bitmap"></param>
-		public void addUndo(string name, Bitmap bitmap)
-		{
-			if (!this.locked)
-			{
-				this.pendingChanges += 1;
-				undo.Push(new NamedPair(name, bitmap));
-				redo.Clear();
-			}
-		}
+        public void ResetPending()
+        {
+            _pendingChanges = 0;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="name"></param>
-		/// <param name="current"></param>
-		/// <returns></returns>
-		public NamedPair getRedo(string name, Bitmap current)
-		{
-			this.pendingChanges += 1;
-			NamedPair pair = (NamedPair)redo.Pop();
-			NamedPair namedPair = new NamedPair(name, current);
-			undo.Push(namedPair);
-			return pair;
-		}
+        public bool PendingChanges => this._pendingChanges > 0;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="current"></param>
-		/// <returns></returns>
-		public NamedPair getUndo(string name, Bitmap current)
-		{
-			this.pendingChanges -= 1;
-			NamedPair redoPair = new NamedPair(name, current);
-			redo.Push(redoPair);
-			return (NamedPair)undo.Pop();
-		}
+        /// <summary>
+        /// Stores an Undo pair
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="bitmap"></param>
+        public void AddUndo(string name, Bitmap bitmap)
+        {
+            if (!this.Lock)
+            {
+                _pendingChanges += 1;
+                _undo.Push(new NamedPair(name, bitmap));
+                _redo.Clear();
+            }
+        }
+        public NamedPair GetRedo(string name, Bitmap current)
+        {
+            _pendingChanges += 1;
+            var pair = _redo.Pop();
+            var namedPair = new NamedPair(name, current);
+            _undo.Push(namedPair);
+            return pair;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public string getUndoName()
-		{
-			return ((NamedPair)undo.Peek()).Name;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        public NamedPair GetUndo(string name, Bitmap current)
+        {
+            _pendingChanges -= 1;
+            var redoPair = new NamedPair(name, current);
+            _redo.Push(redoPair);
+            return _undo.Pop();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public string getRedoName()
-		{
-			return ((NamedPair)redo.Peek()).Name;
-		}
+        public string GetUndoName()
+        {
+            return _undo.Peek()?.Name;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public bool canUndo()
-		{
-			return undo.Count > 0;
-		}
+        public string GetRedoName()
+        {
+            return _redo.Peek()?.Name;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public bool canRedo()
-		{
-			return redo.Count > 0;
-		}
+        public bool CanUndo()
+        {
+            return _undo.Count > 0;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Clear()
-		{
-			this.undo.Clear();
-			this.redo.Clear();
-			this.ResetPending();
-		}
+        public bool CanRedo()
+        {
+            return _redo.Count > 0;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public Bitmap discardAll()
-		{
-			this.ResetPending();
-			this.redo.Clear();
-			this.pendingChanges = 0;
-			while (this.undo.Count > 1)
-			{
-				this.undo.Pop();
-			}
-			return ((NamedPair)this.undo.Pop()).Bitmap;
-		}
+        public void Clear()
+        {
+            _undo.Clear();
+            _redo.Clear();
+            this.ResetPending();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool Lock
-		{
-			get
-			{
-				return this.locked;
-			}
+        public Bitmap DiscardAll()
+        {
+            this.ResetPending();
+            _redo.Clear();
+            _pendingChanges = 0;
+            while (_undo.Count > 1)
+            {
+                _undo.Pop();
+            }
+            return _undo.Pop().Bitmap;
+        }
 
-			set
-			{
-				this.locked = value;
-			}
-		}
+        public bool Lock
+        {
+            get; set;
+        }
 
-		/// <summary>
-		/// Utility class
-		/// </summary>
-		public class NamedPair
-		{
-			/// <summary>
-			/// Name
-			/// </summary>
-			string name;
+        /// <summary>
+        /// Utility class
+        /// </summary>
+        public class NamedPair
+        {
+            public NamedPair(string name, Bitmap bitmap)
+            {
+                this.Name = name;
+                this.Bitmap = bitmap;
+            }
 
-			/// <summary>
-			/// Bitmap
-			/// </summary>
-			Bitmap bitmap;
+            /// <summary>
+            /// Name
+            /// </summary>
+            public string Name
+            {
+                get; private set;
+            }
 
-			/// <summary>
-			/// 
-			/// </summary>
-			/// <param name="name">Pair Name</param>
-			/// <param name="bitmap">Bitmap</param>
-			public NamedPair(string name, Bitmap bitmap)
-			{
-				this.name = name;
-				this.bitmap = bitmap;
-			}
-
-			/// <summary>
-			/// Name
-			/// </summary>
-			public string Name
-			{
-				get
-				{
-					return this.name;
-				}
-			}
-
-			/// <summary>
-			/// Bitmap
-			/// </summary>
-			public Bitmap Bitmap
-			{
-				get
-				{
-					return this.bitmap;
-				}
-			}
-		}
-	} // EOC UndoManager
+            /// <summary>
+            /// Bitmap
+            /// </summary>
+            public Bitmap Bitmap
+            {
+                get; private set;
+            }
+        }
+    }
 }
