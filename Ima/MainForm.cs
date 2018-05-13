@@ -765,7 +765,7 @@ namespace Ima
             this.libraryPane.Location = new System.Drawing.Point(0, 0);
             this.libraryPane.Manager = null;
             this.libraryPane.Name = "libraryPane";
-            this.libraryPane.Size = new System.Drawing.Size(360, 316);
+            this.libraryPane.Size = new System.Drawing.Size(360, 248);
             this.libraryPane.TabIndex = 3;
             // 
             // imageComponent
@@ -788,7 +788,7 @@ namespace Ima
             this.viewsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.viewsPanel.Location = new System.Drawing.Point(369, 3);
             this.viewsPanel.Name = "viewsPanel";
-            this.viewsPanel.Size = new System.Drawing.Size(316, 316);
+            this.viewsPanel.Size = new System.Drawing.Size(316, 248);
             this.viewsPanel.TabIndex = 0;
             // 
             // switchPanel
@@ -797,7 +797,7 @@ namespace Ima
             this.switchPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.switchPanel.Location = new System.Drawing.Point(0, 0);
             this.switchPanel.Name = "switchPanel";
-            this.switchPanel.Size = new System.Drawing.Size(316, 262);
+            this.switchPanel.Size = new System.Drawing.Size(316, 194);
             this.switchPanel.TabIndex = 0;
             // 
             // libraryComponent
@@ -806,14 +806,14 @@ namespace Ima
             this.libraryComponent.Library = null;
             this.libraryComponent.Location = new System.Drawing.Point(0, 0);
             this.libraryComponent.Name = "libraryComponent";
-            this.libraryComponent.Size = new System.Drawing.Size(316, 262);
+            this.libraryComponent.Size = new System.Drawing.Size(316, 194);
             this.libraryComponent.StatusNotification = null;
             this.libraryComponent.TabIndex = 4;
             // 
             // notificationComponent
             // 
             this.notificationComponent.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.notificationComponent.Location = new System.Drawing.Point(0, 262);
+            this.notificationComponent.Location = new System.Drawing.Point(0, 194);
             this.notificationComponent.Name = "notificationComponent";
             this.notificationComponent.Progress = 0;
             this.notificationComponent.Size = new System.Drawing.Size(316, 54);
@@ -828,7 +828,7 @@ namespace Ima
             // 
             this.splitterVertical.Location = new System.Drawing.Point(363, 3);
             this.splitterVertical.Name = "splitterVertical";
-            this.splitterVertical.Size = new System.Drawing.Size(6, 316);
+            this.splitterVertical.Size = new System.Drawing.Size(6, 248);
             this.splitterVertical.TabIndex = 5;
             this.splitterVertical.TabStop = false;
             // 
@@ -838,13 +838,13 @@ namespace Ima
             this.paneLeftSideBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.paneLeftSideBar.Location = new System.Drawing.Point(3, 3);
             this.paneLeftSideBar.Name = "paneLeftSideBar";
-            this.paneLeftSideBar.Size = new System.Drawing.Size(360, 316);
+            this.paneLeftSideBar.Size = new System.Drawing.Size(360, 248);
             this.paneLeftSideBar.TabIndex = 4;
             // 
             // MainForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(9, 22);
-            this.ClientSize = new System.Drawing.Size(688, 319);
+            this.ClientSize = new System.Drawing.Size(688, 251);
             this.Controls.Add(this.viewsPanel);
             this.Controls.Add(this.splitterVertical);
             this.Controls.Add(this.paneLeftSideBar);
@@ -1216,7 +1216,7 @@ namespace Ima
 		{
 			string extension = Path.GetExtension(this.imageComponent.ImageWrapper.Filename);
 			SaveFileDialog sfd = new SaveFileDialog();
-			sfd.Filter = "Current Format (*." + extension.ToLower() + ")|*." + extension;
+			sfd.Filter = "Current Format (*." + extension.ToLowerInvariant() + ")|*." + extension;
 			sfd.CheckPathExists = true;
 			sfd.CheckFileExists = false;
 			sfd.DefaultExt      = "bmp";
@@ -1228,7 +1228,7 @@ namespace Ima
 					|| (MessageBox.Show(this, "Image " + Path.GetFileName(sfd.FileName) + " already exists.  Do you want to overwrite it?", "Question", MessageBoxButtons.YesNo) == DialogResult.Yes))
 				{
 					bool saved = false;
-					switch(Path.GetExtension(sfd.FileName).ToLower())
+					switch(Path.GetExtension(sfd.FileName).ToLowerInvariant())
 					{
 						case "bmp": // BMP
 							saved = this.SaveImage(sfd.FileName, ImageFormat.Bmp);

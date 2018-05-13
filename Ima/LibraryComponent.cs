@@ -809,7 +809,7 @@ namespace Ima
 					{
 						files[i] = ((LibraryListItem)this.listView.SelectedItems[i]).Item.Path;
 					}
-					NativeCalls.printFiles(files);
+					NativeMethods.PrintFiles(files);
 					break;
 				default:
 					break;

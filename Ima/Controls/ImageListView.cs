@@ -12,7 +12,7 @@ namespace Ima.Controls
 		/// <summary>
 		/// 
 		/// </summary>
-		private NativeCalls.LVS_EX styles;
+		private NativeMethods.LVS_EX styles;
 
 		/// <summary>
 		/// 
@@ -39,11 +39,11 @@ namespace Ima.Controls
 		/// Sets ListViewExtended Styles
 		/// </summary>
 		/// <param name="exStyle">The Styles you wish to set.</param>
-		public void SetExStyles(NativeCalls.LVS_EX exStyle)
+		internal void SetExStyles(NativeMethods.LVS_EX exStyle)
 		{
-			styles = (NativeCalls.LVS_EX)NativeCalls.SendMessage(this.Handle, (int) NativeCalls.LVM.LVM_GETEXTENDEDLISTVIEWSTYLE, 0,0);
+			styles = (NativeMethods.LVS_EX)NativeMethods.SendMessage(this.Handle, (int) NativeMethods.LVM.LVM_GETEXTENDEDLISTVIEWSTYLE, IntPtr.Zero, IntPtr.Zero);
 			styles |= exStyle;
-			NativeCalls.SendMessage(this.Handle, (int) NativeCalls.LVM.LVM_SETEXTENDEDLISTVIEWSTYLE, 0, (int) styles);
+			NativeMethods.SendMessage(this.Handle, (int) NativeMethods.LVM.LVM_SETEXTENDEDLISTVIEWSTYLE, IntPtr.Zero, (IntPtr)styles);
 		}
 
 	}

@@ -66,7 +66,7 @@ namespace Ima.Library
 			if (this.iSharedPics == -1)
 			{
 				StringBuilder strBuilder = new StringBuilder(255);
-				NativeCalls.SHGetSpecialFolderPath(IntPtr.Zero, strBuilder, NativeCalls.CSIDL_COMMON_DOCUMENTS, false);
+				NativeMethods.SHGetSpecialFolderPath(IntPtr.Zero, strBuilder, NativeMethods.CSIDL_COMMON_DOCUMENTS, false);
 				path                     = strBuilder.ToString();
 				libraryItem              = new FileLibraryItem("Shared Pictures", path);
 				libraryItem.Deletable    = false;

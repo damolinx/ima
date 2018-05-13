@@ -351,10 +351,10 @@ namespace Ima
                 key.SetValue(@"TileWallpaper", 1.ToString());
             }
 
-            NativeCalls.SystemParametersInfo(NativeCalls.SPI_SETDESKWALLPAPER,
+            NativeMethods.SystemParametersInfo(NativeMethods.SPI_SETDESKWALLPAPER,
                 0,
                 tempPath,
-                NativeCalls.SPIF_UPDATEINIFILE | NativeCalls.SPIF_SENDWININICHANGE);
+                NativeMethods.SPIF_UPDATEINIFILE | NativeMethods.SPIF_SENDWININICHANGE);
         }
     }
 }

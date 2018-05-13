@@ -4,10 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Ima
 {
-    /// <summary>
-    /// Summary description for NativeCalls.
-    /// </summary>
-    public sealed class NativeCalls
+    internal static class NativeMethods
     {
         /// <summary>
         /// "Shared Documents" constant to be used with SHGetSpecialFolderPath
@@ -17,11 +14,6 @@ namespace Ima
         /// <summary>
         /// Native call
         /// </summary>
-        /// <param name="hwndOwner"></param>
-        /// <param name="lpszPath"></param>
-        /// <param name="nFolder"></param>
-        /// <param name="fCreate"></param>
-        /// <returns></returns>
         [DllImport("shell32.dll")]
         public static extern bool SHGetSpecialFolderPath(IntPtr hwndOwner, [Out]
             StringBuilder lpszPath, int nFolder, bool fCreate);
@@ -39,14 +31,6 @@ namespace Ima
         /// </summary>
         public static readonly int SPIF_SENDWININICHANGE = 0x02;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="uAction"></param>
-        /// <param name="uParam"></param>
-        /// <param name="lpvParam"></param>
-        /// <param name="fuWinIni"></param>
-        /// <returns></returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
 
@@ -82,7 +66,6 @@ namespace Ima
             string lpDirectory,
             int nShowCmd);
 
-
         public enum LVS_EX
         {
             LVS_EX_GRIDLINES = 0x00000001,
@@ -116,14 +99,7 @@ namespace Ima
 
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern int SendMessage(IntPtr handle, int messg, int wparam, int lparam);
-
-        /// <summary>
-        /// Hides constructor, so class is not instantiable
-        /// </summary>
-        private NativeCalls()
-        {
-        }
+         public static extern int SendMessage(IntPtr handle, int msg, IntPtr wparam, IntPtr lparam);
 
         /// <summary>
         /// 
@@ -172,7 +148,7 @@ namespace Ima
         // document file, the function will 
         // fail.
 
-        public static void printFiles(string[] files)
+        public static void PrintFiles(string[] files)
         {
             try
             {
