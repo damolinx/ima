@@ -392,61 +392,56 @@ namespace Ima
         {
             string extension = Path.GetExtension(this.imageComponent.ImageWrapper.Filename);
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Current Format (*." + extension.ToLowerInvariant() + ")|*." + extension;
+            sfd.Filter = "Current Format (*" + extension.ToLowerInvariant() + ")|*" + extension;
             sfd.CheckPathExists = true;
             sfd.CheckFileExists = false;
             sfd.DefaultExt = "bmp";
             sfd.AddExtension = true;
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                if (StringComparer.OrdinalIgnoreCase.Equals(sfd.FileName, this.imageComponent.ImageWrapper.Filename)
-                    || !File.Exists(sfd.FileName)
-                    || (MessageBox.Show(this, "Image " + Path.GetFileName(sfd.FileName) + " already exists.  Do you want to overwrite it?", "Question", MessageBoxButtons.YesNo) == DialogResult.Yes))
+                bool saved = false;
+                switch (Path.GetExtension(sfd.FileName).ToLowerInvariant())
                 {
-                    bool saved = false;
-                    switch (Path.GetExtension(sfd.FileName).ToLowerInvariant())
-                    {
-                        case "bmp": // BMP
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Bmp);
-                            break;
-                        case "exif": // EXIF
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Exif);
-                            break;
-                        case "emf": // EMF
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Emf);
-                            break;
-                        case "gif": // GIF
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Gif);
-                            break;
-                        case "ico": // ICO
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Icon);
-                            break;
-                        case "jpg":  // JPG
-                        case "jpeg": // JPEG
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Jpeg);
-                            break;
-                        case "png": // PNG
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Png);
-                            break;
-                        case "tif":  // TIF
-                        case "tiff": // TIFF
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Tiff);
-                            break;
-                        case "wmf": // WMF
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Wmf);
-                            break;
-                        default:
-                            saved = this.SaveImage(sfd.FileName, ImageFormat.Bmp);
-                            break;
-                    }
-                    if (saved)
-                    {
-                        this.imageComponent.ImageWrapper.Filename = sfd.FileName;
-                    }
-                    else
-                    {
-                        MessageBox.Show(this, "Image not saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    case "bmp": // BMP
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Bmp);
+                        break;
+                    case "exif": // EXIF
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Exif);
+                        break;
+                    case "emf": // EMF
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Emf);
+                        break;
+                    case "gif": // GIF
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Gif);
+                        break;
+                    case "ico": // ICO
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Icon);
+                        break;
+                    case "jpg":  // JPG
+                    case "jpeg": // JPEG
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Jpeg);
+                        break;
+                    case "png": // PNG
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Png);
+                        break;
+                    case "tif":  // TIF
+                    case "tiff": // TIFF
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Tiff);
+                        break;
+                    case "wmf": // WMF
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Wmf);
+                        break;
+                    default:
+                        saved = this.SaveImage(sfd.FileName, ImageFormat.Bmp);
+                        break;
+                }
+                if (saved)
+                {
+                    this.imageComponent.ImageWrapper.Filename = sfd.FileName;
+                }
+                else
+                {
+                    MessageBox.Show(this, "Image not saved", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
