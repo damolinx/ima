@@ -390,7 +390,7 @@ namespace Ima
 
         protected int GetCouldNotLoadImage()
         {
-            if (this.previewImageList.Images[ImageListFailedIcon] == null)
+            if (this.previewImageList.Images.Count <= ImageListFailedIcon || this.previewImageList.Images[ImageListFailedIcon] == null)
             {
                 Size largeSize = this.previewImageList.ImageSize;
                 Bitmap bitmap = new Bitmap(largeSize.Width, largeSize.Height);
@@ -417,7 +417,7 @@ namespace Ima
                                                       new Point( hw + dw, largeSize.Height + hw - dh),
                                                       new Point(-hw + dw, largeSize.Height - hw - dh)});
 
-                this.previewImageList.Images[ImageListFailedIcon] = bitmap;
+                this.previewImageList.Images.Add(bitmap);
             }
             return ImageListFailedIcon;
         }
