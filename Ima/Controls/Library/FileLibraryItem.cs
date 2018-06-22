@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -34,9 +35,8 @@ namespace Ima.Library
 
         public override LibraryItem[] GetImageItems(bool sort)
         {
-            //TODO: Handle folder access exceptions
             var items = Program.APPLICATION_IMAGE_SUPPORTED.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
-                .SelectMany(token => Directory.GetFiles(this.Path, token))
+                .SelectMany(extensionSearchPattern => GetFiles(this.Path, extensionSearchPattern))
                 .Select(file => new FileLibraryItem(file))
                 .ToArray();
 
@@ -48,5 +48,22 @@ namespace Ima.Library
         {
             get;
         }
+
+        #region Private
+
+        private static IEnumerable<string> GetFiles(string path, string searchPattern)
+        {
+            try
+            {
+                return Directory.GetFiles(path, searchPattern);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // No access
+                return Array.Empty<string>();
+            }
+        }
+
+        #endregion
     }
 }
