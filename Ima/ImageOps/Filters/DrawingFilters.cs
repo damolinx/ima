@@ -4,10 +4,10 @@ namespace Ima.ImageOps.Filters
 {
     public class FilterPencil : ThresholdFilterBase
     {
+        private double _ratio;
 
-        double ratio;
-
-        public FilterPencil() : base("Pencil")
+        public FilterPencil() 
+            : base("Pencil")
         {
             this.Maximum = 100;
             this.Minimum = 0;
@@ -17,9 +17,6 @@ namespace Ima.ImageOps.Filters
             this.Threshold = 50;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public override int Threshold
         {
             get
@@ -30,7 +27,7 @@ namespace Ima.ImageOps.Filters
             set
             {
                 base.Threshold = value;
-                this.ratio = this.Threshold / 100.0;
+                this._ratio = this.Threshold / 100.0;
             }
         }
 
@@ -51,10 +48,7 @@ namespace Ima.ImageOps.Filters
             pPixels[6] = getPixel(x, y - 1);
             pPixels[7] = getPixel(x + 1, y - 1);
 
-            ///Red
             max_diff = 0;
-
-
 
             foreach (PixelData* pCurrent in pPixels)
             {
@@ -65,7 +59,7 @@ namespace Ima.ImageOps.Filters
                 }
             }
             mask = 1.0 / (max_diff / Math.Sqrt(grayscaled + 1.0) / 3.0 + 1.0);
-            pPixel->red = pPixel->green = pPixel->blue = (byte)(grayscaled + this.ratio * ((255 - grayscaled) * mask - max_diff * grayscaled / 100.0));
+            pPixel->red = pPixel->green = pPixel->blue = (byte)(grayscaled + this._ratio * ((255 - grayscaled) * mask - max_diff * grayscaled / 100.0));
         }
     }
 
@@ -74,7 +68,8 @@ namespace Ima.ImageOps.Filters
 
         private double _ratio;
 
-        public FilterColoredPencil() : base("Colored Pencil")
+        public FilterColoredPencil() 
+            : base("Colored Pencil")
         {
             this.Maximum = 100;
             this.Minimum = 0;

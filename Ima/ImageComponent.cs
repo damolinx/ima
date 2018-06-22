@@ -48,30 +48,12 @@ namespace Ima
         private System.Windows.Forms.ToolBarButton tbBtn_Separator_3;
 
 
-        /// <summary>
-        /// 
-        /// </summary>
         private ImageWrapper wrapper;
-
-        /// <summary>
-        /// reference to the proper IStatusNotification object
-        /// </summary>
         protected IStatusNotification status;
+        private bool autoFit;
+        private int currentColorFilter;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        bool autoFit = true;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        int currentColorFilter;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        FilterStruct[] colorFilters = new[]
+        private FilterStruct[] colorFilters = new[]
         {
             new FilterStruct(10, new FilterBlackWhite()),
             new FilterStruct(5, new FilterInvert()),
@@ -285,9 +267,7 @@ namespace Ima
                             this.status.ZoomEnable = false;
                         }
 
-                        this.imageControl.Zoom = Math.Min(1.0, Math.Max(0.01,
-                            Math.Floor(100.0 * Math.Min(((double)this.panel.Size.Width) / this.imageControl.Image.Width,
-                            ((double)this.panel.Size.Height) / this.imageControl.Image.Height)) / 100.0));
+                        ForceAutoFit();
                     }
                     else
                     {
@@ -309,6 +289,13 @@ namespace Ima
             {
                 return this.autoFit;
             }
+        }
+
+        public void ForceAutoFit()
+        {
+            this.imageControl.Zoom = Math.Min(1.0, Math.Max(0.01,
+                Math.Floor(100.0 * Math.Min(((double)this.panel.Size.Width) / this.imageControl.Image?.Width ?? 1,
+                ((double)this.panel.Size.Height) / this.imageControl.Image?.Height ?? 1)) / 100.0));
         }
 
         /// <summary>
@@ -413,7 +400,10 @@ namespace Ima
                     this.ImageWrapper.Changed += ImageWrapper_Changed;
 
                     //Scale for view
-                    this.AutoFit = this.autoFit;
+                    if (this.AutoFit)
+                    {
+                        ForceAutoFit();
+                    }
 
                     //Remove Selection
                     this.imageControl.SelectionActive = false;
@@ -456,7 +446,10 @@ namespace Ima
         {
             if (this.ImageWrapper != null)
             {
-                this.AutoFit = this.autoFit;
+                if (this.AutoFit)
+                {
+                    ForceAutoFit();
+                }
             }
         }
 

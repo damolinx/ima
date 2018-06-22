@@ -3,14 +3,11 @@ using System.Drawing;
 
 namespace Ima.ImageOps
 {
-    /// <summary>
-    /// Event Class
-    /// </summary>
     public class ImageChangedEventArgs : EventArgs
     {
         public ImageChangedEventArgs(Bitmap old)
+            : this(null, old)
         {
-            this.Bitmap = old;
         }
 
         public ImageChangedEventArgs(string name, Bitmap old)
@@ -24,7 +21,7 @@ namespace Ima.ImageOps
         /// </summary>
         public Bitmap Bitmap
         {
-            get; private set;
+            get;
         }
 
         /// <summary>
@@ -32,7 +29,7 @@ namespace Ima.ImageOps
         /// </summary>
         public string Name
         {
-            get; private set;
+            get;
         }
     }
 }

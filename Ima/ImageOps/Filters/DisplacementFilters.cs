@@ -5,22 +5,24 @@ namespace Ima.ImageOps.Filters
 {
     public class FilterFrostedGlass : ThresholdFilterBase
     {
-        Random rand;
+        private readonly Random _rand;
 
-        public FilterFrostedGlass() : base("Frosted Glass")
+        public FilterFrostedGlass() 
+            : base("Frosted Glass")
         {
             this.Direct = false;
-            rand = new Random();
+            _rand = new Random();
             this.Minimum = 0;
             this.Maximum = 10;
             this.Threshold = 1;
             this.Property = "Frost thickness";
         }
 
-        public FilterFrostedGlass(int seed) : base("Frosted Glass")
+        public FilterFrostedGlass(int seed) 
+            : base("Frosted Glass")
         {
             this.Direct = false;
-            rand = new Random(seed);
+            _rand = new Random(seed);
             this.Minimum = 0;
             this.Maximum = 10;
             this.Threshold = 1;
@@ -29,8 +31,8 @@ namespace Ima.ImageOps.Filters
 
         public unsafe override void Filter(int x, int y, PixelGet getPixel, PixelData* pPixel, int x0, int y0, int x1, int y1)
         {
-            int rand_x = Math.Min(Math.Max(x0, x + rand.Next(-this.Threshold, this.Threshold)), x1);
-            int rand_y = Math.Min(Math.Max(y0, y + rand.Next(-this.Threshold, this.Threshold)), y1);
+            int rand_x = Math.Min(Math.Max(x0, x + _rand.Next(-this.Threshold, this.Threshold)), x1);
+            int rand_y = Math.Min(Math.Max(y0, y + _rand.Next(-this.Threshold, this.Threshold)), y1);
 
             PixelData* pRandPixel = getPixel(rand_x, rand_y);
 
