@@ -51,8 +51,8 @@ namespace Ima
             this.Text = Program.APPLICATION_NAME;
 
             //Add relevant listeners
-            this.libraryPane.OpenLibrary += new OpenLibraryItemEventHandler(libraryPane_OpenLibrary);
-            this.libraryComponent.OpenImage += new ImageOpenEventHandler(libraryComponent_OpenImage);
+            this.libraryPane.OpenLibrary += libraryPane_OpenLibrary;
+            this.libraryComponent.OpenImage += libraryComponent_OpenImage;
 
             this.libraryComponent.StatusNotification = this.notificationComponent;
 
@@ -220,7 +220,7 @@ namespace Ima
                         MessageBoxIcon.Error);
                     return false;
                 }
-                this.imageComponent.ImageWrapper.Changed += new ImageChangedEventHandler(OnBitmapChanged);
+                this.imageComponent.ImageWrapper.Changed += OnBitmapChanged;
                 ResetGUIState();
                 return true;
             }
@@ -253,7 +253,7 @@ namespace Ima
                         MessageBoxIcon.Error);
                     return false;
                 }
-                this.imageComponent.ImageWrapper.Changed += new ImageChangedEventHandler(OnBitmapChanged);
+                this.imageComponent.ImageWrapper.Changed += OnBitmapChanged;
                 ResetGUIState();
                 SwitchView(true, ViewMode.Editor);
                 return true;
@@ -285,12 +285,10 @@ namespace Ima
 
                 }
                 this.undoManager.Clear();
-                this.imageComponent.ImageWrapper.Changed -= new ImageChangedEventHandler(OnBitmapChanged);
+                this.imageComponent.ImageWrapper.Changed -= OnBitmapChanged;
 
                 ResetGUIState();
                 SwitchView(true, ViewMode.Library);
-                //TODO Check the generation # to use to avoid clearing a cache 
-                GC.Collect();
             }
             return true;
         }

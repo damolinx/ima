@@ -144,7 +144,7 @@ namespace Ima
             this.panel.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panel.Controls.Add(this.imageControl);
             this.panel.Size = new System.Drawing.Size(528, 350);
-            this.panel.SizeChanged += new System.EventHandler(this.panel_SizeChanged);
+            this.panel.SizeChanged += this.panel_SizeChanged;
             // 
             // imageList
             // 
@@ -176,7 +176,7 @@ namespace Ima
             this.tbBtn_Separator_3,
             this.tbBtn_Color_Filter});
             this.toolBar.Size = new System.Drawing.Size(528, 64);
-            this.toolBar.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar_ButtonClick);
+            this.toolBar.ButtonClick += this.toolBar_ButtonClick;
             // 
             // bottomPanel
             // 
@@ -220,7 +220,7 @@ namespace Ima
             this.imageControl.Size = new System.Drawing.Size(368, 288);
             this.imageControl.TabIndex = 0;
             this.imageControl.Zoom = 1;
-            this.imageControl.SelectionChanged += new Ima.Controls.SelectionChangedEventHandler(this.imageControl_SelectionChanged);
+            this.imageControl.SelectionChanged += this.imageControl_SelectionChanged;
             // 
             // tbBtn_Color_Filter
             // 
@@ -387,17 +387,12 @@ namespace Ima
         }
 
         #region Properties
-        /// <summary>
-        /// 
-        /// </summary>
+
         public string LastOperation
         {
             get; set;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public ImageWrapper ImageWrapper
         {
             get
@@ -408,13 +403,13 @@ namespace Ima
             {
                 if (this.wrapper != null)
                 {
-                    this.ImageWrapper.Changed -= new ImageChangedEventHandler(ImageWrapper_Changed);
+                    this.ImageWrapper.Changed -= ImageWrapper_Changed;
                 }
                 this.wrapper = value;
                 if (value != null)
                 {
                     this.imageControl.Image = value.Bitmap;
-                    this.ImageWrapper.Changed += new ImageChangedEventHandler(ImageWrapper_Changed);
+                    this.ImageWrapper.Changed += ImageWrapper_Changed;
 
                     //Scale for view
                     this.AutoFit = this.autoFit;
@@ -514,7 +509,7 @@ namespace Ima
                 this.filterStruct = f;
                 this.imageComponent = component;
                 this.Text = f.filter.Name;
-                this.Click += new EventHandler(ColorFilterMenuItem_Click);
+                this.Click += ColorFilterMenuItem_Click;
             }
 
             private void ColorFilterMenuItem_Click(object sender, EventArgs e)

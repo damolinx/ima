@@ -105,7 +105,7 @@ namespace Ima.Controls
 			this.Controls.Add(this.trackBar);
 			this.Name = "ZoomControl";
 			this.Size = new System.Drawing.Size(400, 26);
-			this.EnabledChanged += new System.EventHandler(this.ZoomControl_EnabledChanged);
+			this.EnabledChanged += this.ZoomControl_EnabledChanged;
 			((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
 			this.ResumeLayout(false);
 

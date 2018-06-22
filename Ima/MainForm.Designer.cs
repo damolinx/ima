@@ -149,20 +149,20 @@ namespace Ima
             this.menuItem_File_New.Index = 0;
             this.menuItem_File_New.Shortcut = System.Windows.Forms.Shortcut.CtrlN;
             this.menuItem_File_New.Text = "&New...";
-            this.menuItem_File_New.Click += new System.EventHandler(this.menuItem_File_New_Click);
+            this.menuItem_File_New.Click += this.menuItem_File_New_Click;
             // 
             // menuItem_File_Open
             // 
             this.menuItem_File_Open.Index = 1;
             this.menuItem_File_Open.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
             this.menuItem_File_Open.Text = "&Open...";
-            this.menuItem_File_Open.Click += new System.EventHandler(this.menuItem_File_Open_Click);
+            this.menuItem_File_Open.Click += this.menuItem_File_Open_Click;
             // 
             // menuItem_File_Close
             // 
             this.menuItem_File_Close.Index = 2;
             this.menuItem_File_Close.Text = "&Close";
-            this.menuItem_File_Close.Click += new System.EventHandler(this.menuItem_File_Close_Click);
+            this.menuItem_File_Close.Click += this.menuItem_File_Close_Click;
             // 
             // menuItem_File_Separator_1
             // 
@@ -174,14 +174,14 @@ namespace Ima
             this.menuItem_File_Save.Index = 4;
             this.menuItem_File_Save.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
             this.menuItem_File_Save.Text = "&Save";
-            this.menuItem_File_Save.Click += new System.EventHandler(this.menuItem_File_Save_Click);
+            this.menuItem_File_Save.Click += this.menuItem_File_Save_Click;
             // 
             // menuItem_File_SaveAs
             // 
             this.menuItem_File_SaveAs.Index = 5;
             this.menuItem_File_SaveAs.Shortcut = System.Windows.Forms.Shortcut.CtrlShiftS;
             this.menuItem_File_SaveAs.Text = "Save &As...";
-            this.menuItem_File_SaveAs.Click += new System.EventHandler(this.menuItem_File_SaveAs_Click);
+            this.menuItem_File_SaveAs.Click += this.menuItem_File_SaveAs_Click;
             // 
             // menuItem_File_Separator_2
             // 
@@ -192,13 +192,13 @@ namespace Ima
             // 
             this.menuItem_File_ScannerCamera.Index = 7;
             this.menuItem_File_ScannerCamera.Text = "From Scanner or Camera...";
-            this.menuItem_File_ScannerCamera.Click += new System.EventHandler(this.menuItem_File_ScannerCamera_Click);
+            this.menuItem_File_ScannerCamera.Click += this.menuItem_File_ScannerCamera_Click;
             // 
             // menuItem_File_Screenshot
             // 
             this.menuItem_File_Screenshot.Index = 8;
             this.menuItem_File_Screenshot.Text = "Screenshot...";
-            this.menuItem_File_Screenshot.Click += new System.EventHandler(this.menuItem_File_Screenshot_Click);
+            this.menuItem_File_Screenshot.Click += this.menuItem_File_Screenshot_Click;
             // 
             // menuItem_File_Separator_3
             // 
@@ -210,7 +210,7 @@ namespace Ima
             this.menuItem_File_Exit.Index = 10;
             this.menuItem_File_Exit.Shortcut = System.Windows.Forms.Shortcut.AltF4;
             this.menuItem_File_Exit.Text = "E&xit";
-            this.menuItem_File_Exit.Click += new System.EventHandler(this.menuItem_File_Exit_Click);
+            this.menuItem_File_Exit.Click += this.menuItem_File_Exit_Click;
             // 
             // menuItem_Edit
             // 
@@ -224,27 +224,27 @@ namespace Ima
             this.menuItem_Edit_Copy,
             this.menuItem_Edit_Paste});
             this.menuItem_Edit.Text = "&Edit";
-            this.menuItem_Edit.Popup += new System.EventHandler(this.menuItem_Edit_Popup);
+            this.menuItem_Edit.Popup += this.menuItem_Edit_Popup;
             // 
             // menuItem_Edit_Undo
             // 
             this.menuItem_Edit_Undo.Index = 0;
             this.menuItem_Edit_Undo.Shortcut = System.Windows.Forms.Shortcut.CtrlZ;
             this.menuItem_Edit_Undo.Text = "&Undo";
-            this.menuItem_Edit_Undo.Click += new System.EventHandler(this.menuItem_Edit_Undo_Click);
+            this.menuItem_Edit_Undo.Click += this.menuItem_Edit_Undo_Click;
             // 
             // menuItem_Edit_Redo
             // 
             this.menuItem_Edit_Redo.Index = 1;
             this.menuItem_Edit_Redo.Shortcut = System.Windows.Forms.Shortcut.CtrlY;
             this.menuItem_Edit_Redo.Text = "&Redo";
-            this.menuItem_Edit_Redo.Click += new System.EventHandler(this.menuItem_Edit_Redo_Click);
+            this.menuItem_Edit_Redo.Click += this.menuItem_Edit_Redo_Click;
             // 
             // menuItem_Edit_DiscardAll
             // 
             this.menuItem_Edit_DiscardAll.Index = 2;
             this.menuItem_Edit_DiscardAll.Text = "Discard &All Changes";
-            this.menuItem_Edit_DiscardAll.Click += new System.EventHandler(this.menuItem_Edit_DiscardAll_Click);
+            this.menuItem_Edit_DiscardAll.Click += this.menuItem_Edit_DiscardAll_Click;
             // 
             // menuItem_Edit_Separator_1
             // 
@@ -256,21 +256,21 @@ namespace Ima
             this.menuItem_Edit_Cut.Index = 4;
             this.menuItem_Edit_Cut.Shortcut = System.Windows.Forms.Shortcut.CtrlX;
             this.menuItem_Edit_Cut.Text = "Cu&t";
-            this.menuItem_Edit_Cut.Click += new System.EventHandler(this.menuItem_Edit_Cut_Click);
+            this.menuItem_Edit_Cut.Click += this.menuItem_Edit_Cut_Click;
             // 
             // menuItem_Edit_Copy
             // 
             this.menuItem_Edit_Copy.Index = 5;
             this.menuItem_Edit_Copy.Shortcut = System.Windows.Forms.Shortcut.CtrlC;
             this.menuItem_Edit_Copy.Text = "&Copy";
-            this.menuItem_Edit_Copy.Click += new System.EventHandler(this.menuItem_Edit_Copy_Click);
+            this.menuItem_Edit_Copy.Click += this.menuItem_Edit_Copy_Click;
             // 
             // menuItem_Edit_Paste
             // 
             this.menuItem_Edit_Paste.Index = 6;
             this.menuItem_Edit_Paste.Shortcut = System.Windows.Forms.Shortcut.CtrlV;
             this.menuItem_Edit_Paste.Text = "&Paste";
-            this.menuItem_Edit_Paste.Click += new System.EventHandler(this.menuItem_Edit_Paste_Click);
+            this.menuItem_Edit_Paste.Click += this.menuItem_Edit_Paste_Click;
             // 
             // menuItem_View
             // 
@@ -285,7 +285,7 @@ namespace Ima
             // 
             this.menuItem_View_Thumbnail.Index = 0;
             this.menuItem_View_Thumbnail.Text = "&Thumbnail";
-            this.menuItem_View_Thumbnail.Click += new System.EventHandler(this.menuItem_View_Thumbnail_Click);
+            this.menuItem_View_Thumbnail.Click += this.menuItem_View_Thumbnail_Click;
             // 
             // menuItem_View_Separator_1
             // 
@@ -315,13 +315,13 @@ namespace Ima
             // 
             this.menuItem_Image_FlipRotate.Index = 0;
             this.menuItem_Image_FlipRotate.Text = "&Flip or Rotate...";
-            this.menuItem_Image_FlipRotate.Click += new System.EventHandler(this.menuItem_Image_FlipRotate_Click);
+            this.menuItem_Image_FlipRotate.Click += this.menuItem_Image_FlipRotate_Click;
             // 
             // menuItem_Image_StretchResize
             // 
             this.menuItem_Image_StretchResize.Index = 1;
             this.menuItem_Image_StretchResize.Text = "&Stretch or Resize...";
-            this.menuItem_Image_StretchResize.Click += new System.EventHandler(this.menuItem_Image_StretchResize_Click);
+            this.menuItem_Image_StretchResize.Click += this.menuItem_Image_StretchResize_Click;
             // 
             // menuItem_Image_Separator_1
             // 
@@ -332,19 +332,19 @@ namespace Ima
             // 
             this.menuItem_Image_Brightness.Index = 3;
             this.menuItem_Image_Brightness.Text = "&Brightness...";
-            this.menuItem_Image_Brightness.Click += new System.EventHandler(this.menuItem_Image_Brightness_Click);
+            this.menuItem_Image_Brightness.Click += this.menuItem_Image_Brightness_Click;
             // 
             // menuItem_Image_Contrast
             // 
             this.menuItem_Image_Contrast.Index = 4;
             this.menuItem_Image_Contrast.Text = "Contrast...";
-            this.menuItem_Image_Contrast.Click += new System.EventHandler(this.menuItem_Image_Contrast_Click);
+            this.menuItem_Image_Contrast.Click += this.menuItem_Image_Contrast_Click;
             // 
             // menuItem_Image_Gamma
             // 
             this.menuItem_Image_Gamma.Index = 5;
             this.menuItem_Image_Gamma.Text = "Gamma Correction...";
-            this.menuItem_Image_Gamma.Click += new System.EventHandler(this.menuItem_Image_Gamma_Click);
+            this.menuItem_Image_Gamma.Click += this.menuItem_Image_Gamma_Click;
             // 
             // menuItem_Image_Separator_2
             // 
@@ -369,13 +369,13 @@ namespace Ima
             // 
             this.menuItem_Colors_BlackWhite.Index = 0;
             this.menuItem_Colors_BlackWhite.Text = "Black && &White...";
-            this.menuItem_Colors_BlackWhite.Click += new System.EventHandler(this.menuItem_Colors_BlackWhite_Click);
+            this.menuItem_Colors_BlackWhite.Click += this.menuItem_Colors_BlackWhite_Click;
             // 
             // menuItem_Colors_Invert
             // 
             this.menuItem_Colors_Invert.Index = 1;
             this.menuItem_Colors_Invert.Text = "&Invert";
-            this.menuItem_Colors_Invert.Click += new System.EventHandler(this.menuItem_Colors_Invert_Click);
+            this.menuItem_Colors_Invert.Click += this.menuItem_Colors_Invert_Click;
             // 
             // menuItem_Colors_Separator_1
             // 
@@ -386,25 +386,25 @@ namespace Ima
             // 
             this.menuItem_Colors_Grayscale.Index = 3;
             this.menuItem_Colors_Grayscale.Text = "&Grayscale";
-            this.menuItem_Colors_Grayscale.Click += new System.EventHandler(this.menuItem_Colors_Grayscale_Click);
+            this.menuItem_Colors_Grayscale.Click += this.menuItem_Colors_Grayscale_Click;
             // 
             // menuItem_Colors_Redscale
             // 
             this.menuItem_Colors_Redscale.Index = 4;
             this.menuItem_Colors_Redscale.Text = "&Redscale";
-            this.menuItem_Colors_Redscale.Click += new System.EventHandler(this.menuItem_Colors_Redscale_Click);
+            this.menuItem_Colors_Redscale.Click += this.menuItem_Colors_Redscale_Click;
             // 
             // menuItem_Colors_Greenscale
             // 
             this.menuItem_Colors_Greenscale.Index = 5;
             this.menuItem_Colors_Greenscale.Text = "G&reenscale";
-            this.menuItem_Colors_Greenscale.Click += new System.EventHandler(this.menuItem_Colors_Greenscale_Click);
+            this.menuItem_Colors_Greenscale.Click += this.menuItem_Colors_Greenscale_Click;
             // 
             // menuItem_Colors_Bluescale
             // 
             this.menuItem_Colors_Bluescale.Index = 6;
             this.menuItem_Colors_Bluescale.Text = "&Bluescale";
-            this.menuItem_Colors_Bluescale.Click += new System.EventHandler(this.menuItem_Colors_Bluescale_Click);
+            this.menuItem_Colors_Bluescale.Click += this.menuItem_Colors_Bluescale_Click;
             // 
             // menuItem_Colors_Separator_2
             // 
@@ -435,25 +435,25 @@ namespace Ima
             // 
             this.menuItem_Effects_Blur.Index = 0;
             this.menuItem_Effects_Blur.Text = "&Blur...";
-            this.menuItem_Effects_Blur.Click += new System.EventHandler(this.menuItem_Effects_Blur_Click);
+            this.menuItem_Effects_Blur.Click += this.menuItem_Effects_Blur_Click;
             // 
             // menuItem_Effects_Sharpen
             // 
             this.menuItem_Effects_Sharpen.Index = 1;
             this.menuItem_Effects_Sharpen.Text = "&Sharpen...";
-            this.menuItem_Effects_Sharpen.Click += new System.EventHandler(this.menuItem_Effects_Sharpen_Click);
+            this.menuItem_Effects_Sharpen.Click += this.menuItem_Effects_Sharpen_Click;
             // 
             // menuItem_Effects_Emboss
             // 
             this.menuItem_Effects_Emboss.Index = 2;
             this.menuItem_Effects_Emboss.Text = "Emb&oss...";
-            this.menuItem_Effects_Emboss.Click += new System.EventHandler(this.menuItem_Effects_Emboss_Click);
+            this.menuItem_Effects_Emboss.Click += this.menuItem_Effects_Emboss_Click;
             // 
             // menuItem_Effects_EdgeEnhance
             // 
             this.menuItem_Effects_EdgeEnhance.Index = 3;
             this.menuItem_Effects_EdgeEnhance.Text = "Edge En&hance...";
-            this.menuItem_Effects_EdgeEnhance.Click += new System.EventHandler(this.menuItem_Effects_EdgeEnhance_Click);
+            this.menuItem_Effects_EdgeEnhance.Click += this.menuItem_Effects_EdgeEnhance_Click;
             // 
             // menuItem_Effects_EdgeDetect
             // 
@@ -469,25 +469,25 @@ namespace Ima
             // 
             this.menuItem_Effects_ED_BW.Index = 0;
             this.menuItem_Effects_ED_BW.Text = "&Black && White";
-            this.menuItem_Effects_ED_BW.Click += new System.EventHandler(this.menuItem_Effects_ED_BW_Click);
+            this.menuItem_Effects_ED_BW.Click += this.menuItem_Effects_ED_BW_Click;
             // 
             // menuItemEffects_ED_Kirsh
             // 
             this.menuItemEffects_ED_Kirsh.Index = 1;
             this.menuItemEffects_ED_Kirsh.Text = "&Kirsh";
-            this.menuItemEffects_ED_Kirsh.Click += new System.EventHandler(this.menuItemEffects_ED_Kirsh_Click);
+            this.menuItemEffects_ED_Kirsh.Click += this.menuItemEffects_ED_Kirsh_Click;
             // 
             // menuItem_Effects_ED_Prewitt
             // 
             this.menuItem_Effects_ED_Prewitt.Index = 2;
             this.menuItem_Effects_ED_Prewitt.Text = "&Prewitt";
-            this.menuItem_Effects_ED_Prewitt.Click += new System.EventHandler(this.menuItem_Effects_ED_Prewitt_Click);
+            this.menuItem_Effects_ED_Prewitt.Click += this.menuItem_Effects_ED_Prewitt_Click;
             // 
             // menuItem_Effects_ED_Sobel
             // 
             this.menuItem_Effects_ED_Sobel.Index = 3;
             this.menuItem_Effects_ED_Sobel.Text = "&Sobel";
-            this.menuItem_Effects_ED_Sobel.Click += new System.EventHandler(this.menuItem_Effects_ED_Sobel_Click);
+            this.menuItem_Effects_ED_Sobel.Click += this.menuItem_Effects_ED_Sobel_Click;
             // 
             // menuItem_Effects_Separator_1
             // 
@@ -498,19 +498,19 @@ namespace Ima
             // 
             this.menuItem_Effects_Dilate.Index = 6;
             this.menuItem_Effects_Dilate.Text = "D&ilate...";
-            this.menuItem_Effects_Dilate.Click += new System.EventHandler(this.menuItem_Effects_Dilate_Click);
+            this.menuItem_Effects_Dilate.Click += this.menuItem_Effects_Dilate_Click;
             // 
             // menuItem_Effects_Median
             // 
             this.menuItem_Effects_Median.Index = 7;
             this.menuItem_Effects_Median.Text = "&Median";
-            this.menuItem_Effects_Median.Click += new System.EventHandler(this.menuItem_Effects_Median_Click);
+            this.menuItem_Effects_Median.Click += this.menuItem_Effects_Median_Click;
             // 
             // menuItem_Effects_Erosion
             // 
             this.menuItem_Effects_Erosion.Index = 8;
             this.menuItem_Effects_Erosion.Text = "&Erosion";
-            this.menuItem_Effects_Erosion.Click += new System.EventHandler(this.menuItem_Effects_Erosion_Click);
+            this.menuItem_Effects_Erosion.Click += this.menuItem_Effects_Erosion_Click;
             // 
             // menuItem_Effects_Separator_2
             // 
@@ -521,13 +521,13 @@ namespace Ima
             // 
             this.menuItem_Effects_Posterize.Index = 10;
             this.menuItem_Effects_Posterize.Text = "&Posterize...";
-            this.menuItem_Effects_Posterize.Click += new System.EventHandler(this.menuItem_Effects_Posterize_Click);
+            this.menuItem_Effects_Posterize.Click += this.menuItem_Effects_Posterize_Click;
             // 
             // menuItem_Effects_Solarize
             // 
             this.menuItem_Effects_Solarize.Index = 11;
             this.menuItem_Effects_Solarize.Text = "Solari&ze...";
-            this.menuItem_Effects_Solarize.Click += new System.EventHandler(this.menuItem_Effects_Solarize_Click);
+            this.menuItem_Effects_Solarize.Click += this.menuItem_Effects_Solarize_Click;
             // 
             // menuItem_Effects_Separator_3
             // 
@@ -538,7 +538,7 @@ namespace Ima
             // 
             this.menuItem_Effects_Mean.Index = 13;
             this.menuItem_Effects_Mean.Text = "Mea&n";
-            this.menuItem_Effects_Mean.Click += new System.EventHandler(this.menuItem_Effects_Mean_Click);
+            this.menuItem_Effects_Mean.Click += this.menuItem_Effects_Mean_Click;
             // 
             // menuItem_Styles
             // 
@@ -554,25 +554,25 @@ namespace Ima
             // 
             this.menuItem_Styles_ColoredPencils.Index = 0;
             this.menuItem_Styles_ColoredPencils.Text = "&Colored Pencils...";
-            this.menuItem_Styles_ColoredPencils.Click += new System.EventHandler(this.menuItem_Styles_ColoredPencils_Click);
+            this.menuItem_Styles_ColoredPencils.Click += this.menuItem_Styles_ColoredPencils_Click;
             // 
             // menuItem_Styles_FrostedGlass
             // 
             this.menuItem_Styles_FrostedGlass.Index = 1;
             this.menuItem_Styles_FrostedGlass.Text = "&Frosted Glass...";
-            this.menuItem_Styles_FrostedGlass.Click += new System.EventHandler(this.menuItem_Styles_FrostedGlass_Click);
+            this.menuItem_Styles_FrostedGlass.Click += this.menuItem_Styles_FrostedGlass_Click;
             // 
             // menuItem_Styles_OilPainting
             // 
             this.menuItem_Styles_OilPainting.Index = 2;
             this.menuItem_Styles_OilPainting.Text = "&Oil Painting...";
-            this.menuItem_Styles_OilPainting.Click += new System.EventHandler(this.menuItem_Styles_OilPainting_Click);
+            this.menuItem_Styles_OilPainting.Click += this.menuItem_Styles_OilPainting_Click;
             // 
             // menuItem_Styles_Pencil
             // 
             this.menuItem_Styles_Pencil.Index = 3;
             this.menuItem_Styles_Pencil.Text = "&Pencil...";
-            this.menuItem_Styles_Pencil.Click += new System.EventHandler(this.menuItem_Styles_Pencil_Click);
+            this.menuItem_Styles_Pencil.Click += this.menuItem_Styles_Pencil_Click;
             // 
             // menuItem_Help
             // 
@@ -585,7 +585,7 @@ namespace Ima
             // 
             this.menuItem_Help_About.Index = 0;
             this.menuItem_Help_About.Text = "&About...";
-            this.menuItem_Help_About.Click += new System.EventHandler(this.menuItem_Help_About_Click);
+            this.menuItem_Help_About.Click += this.menuItem_Help_About_Click;
             // 
             // libraryPane
             // 

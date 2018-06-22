@@ -65,7 +65,7 @@ namespace Ima.Controls
             this.cancelButton.TabIndex = 0;
             this.cancelButton.Text = "&Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.cancelButton.Click += this.CancelButton_Click;
             // 
             // applyButton
             // 
@@ -76,7 +76,7 @@ namespace Ima.Controls
             this.applyButton.TabIndex = 1;
             this.applyButton.Text = "&Apply";
             this.applyButton.UseVisualStyleBackColor = true;
-            this.applyButton.Click += new System.EventHandler(this.ApplyButton_Click);
+            this.applyButton.Click += this.ApplyButton_Click;
             // 
             // ToolForm
             // 

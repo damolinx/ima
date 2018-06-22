@@ -171,7 +171,7 @@ namespace Ima
                                                                                        this.tbBtn_Print});
             this.toolBar.Name = "toolBar";
             this.toolBar.Size = new System.Drawing.Size(400, 56);
-            this.toolBar.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar_ButtonClick);
+            this.toolBar.ButtonClick += this.toolBar_ButtonClick;
             // 
             // bottomPanel
             // 
@@ -192,11 +192,11 @@ namespace Ima
             this.listView.Size = new System.Drawing.Size(400, 288);
             this.listView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listView.TabIndex = 0;
-            this.listView.DoubleClick += new System.EventHandler(this.listView_DoubleClick);
-            this.listView.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView_AfterLabelEdit);
-            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
-            this.listView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView_MouseMove);
-            this.listView.Enter += new System.EventHandler(this.listView_Enter);
+            this.listView.DoubleClick += this.listView_DoubleClick;
+            this.listView.AfterLabelEdit += this.listView_AfterLabelEdit;
+            this.listView.SelectedIndexChanged += this.listView_SelectedIndexChanged;
+            this.listView.MouseMove += this.listView_MouseMove;
+            this.listView.Enter += this.listView_Enter;
             // 
             // contextMenu
             // 
@@ -216,7 +216,7 @@ namespace Ima
             this.menuItem_ListItem_Edit.DefaultItem = true;
             this.menuItem_ListItem_Edit.Index = 0;
             this.menuItem_ListItem_Edit.Text = "&Edit...";
-            this.menuItem_ListItem_Edit.Click += new System.EventHandler(this.menuItem_ListItem_Edit_Click);
+            this.menuItem_ListItem_Edit.Click += this.menuItem_ListItem_Edit_Click;
             // 
             // menuItem_ListItem_Separator_1
             // 
@@ -227,19 +227,19 @@ namespace Ima
             // 
             this.menuItem_ListItem_Copy.Index = 2;
             this.menuItem_ListItem_Copy.Text = "&Copy";
-            this.menuItem_ListItem_Copy.Click += new System.EventHandler(this.menuItem_ListItem_Copy_Click);
+            this.menuItem_ListItem_Copy.Click += this.menuItem_ListItem_Copy_Click;
             // 
             // menuItem_ListItem_Paste
             // 
             this.menuItem_ListItem_Paste.Index = 3;
             this.menuItem_ListItem_Paste.Text = "&Paste";
-            this.menuItem_ListItem_Paste.Click += new System.EventHandler(this.menuItem_ListItem_Paste_Click);
+            this.menuItem_ListItem_Paste.Click += this.menuItem_ListItem_Paste_Click;
             // 
             // menuItem_ListItem_Rename
             // 
             this.menuItem_ListItem_Rename.Index = 4;
             this.menuItem_ListItem_Rename.Text = "&Rename...";
-            this.menuItem_ListItem_Rename.Click += new System.EventHandler(this.menuItem_ListItem_Rename_Click);
+            this.menuItem_ListItem_Rename.Click += this.menuItem_ListItem_Rename_Click;
             // 
             // menuItem_ListItem_Separator_2
             // 
@@ -250,7 +250,7 @@ namespace Ima
             // 
             this.menuItem_ListItem_Delete.Index = 6;
             this.menuItem_ListItem_Delete.Text = "&Delete";
-            this.menuItem_ListItem_Delete.Click += new System.EventHandler(this.menuItem_ListItem_Delete_Click);
+            this.menuItem_ListItem_Delete.Click += this.menuItem_ListItem_Delete_Click;
             // 
             // menuItem_ListItem_Separator_3
             // 
@@ -261,7 +261,7 @@ namespace Ima
             // 
             this.menuItem_ListItem_Properties.Index = 8;
             this.menuItem_ListItem_Properties.Text = "Propert&ies";
-            this.menuItem_ListItem_Properties.Click += new System.EventHandler(this.menuItem_ListItem_Properties_Click);
+            this.menuItem_ListItem_Properties.Click += this.menuItem_ListItem_Properties_Click;
             // 
             // previewImageList
             // 

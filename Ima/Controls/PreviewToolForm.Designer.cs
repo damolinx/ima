@@ -42,8 +42,8 @@ namespace Ima.Controls
             this.ClientSize = new System.Drawing.Size(936, 536);
             this.Controls.Add(this.imageBox);
             this.Name = "PreviewToolForm";
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.PreviewForm_Closing);
-            this.VisibleChanged += new System.EventHandler(this.PreviewForm_VisibleChanged);
+            this.Closing += this.PreviewForm_Closing;
+            this.VisibleChanged += this.PreviewForm_VisibleChanged;
             this.Controls.SetChildIndex(this.imageBox, 0);
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             this.ResumeLayout(false);

@@ -106,7 +106,7 @@ namespace Ima
             this.tbBtn_Separator_1,
             this.tbBtn_Properties});
             this.toolBar.Size = new System.Drawing.Size(192, 26);
-            this.toolBar.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar_ButtonClick);
+            this.toolBar.ButtonClick += this.toolBar_ButtonClick;
             // 
             // bottomPanel
             // 
@@ -138,8 +138,8 @@ namespace Ima
             this.libTree.SelectedImageIndex = 0;
             this.libTree.Size = new System.Drawing.Size(192, 400);
             this.libTree.TabIndex = 0;
-            this.libTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.libTree_AfterSelect);
-            this.libTree.Click += new System.EventHandler(this.libTree_Click);
+            this.libTree.AfterSelect += this.libTree_AfterSelect;
+            this.libTree.Click += this.libTree_Click;
             // 
             // tbBtn_Add
             // 
@@ -193,8 +193,8 @@ namespace Ima
                 //Clean previous
                 if (this.manager != null)
                 {
-                    this.manager.AddedLibraryItem -= new OnLibraryItemEventHandler(this.manager_AddedLibraryItem);
-                    this.manager.RemovedLibraryItem -= new OnLibraryItemEventHandler(this.manager_RemovedLibraryItem);
+                    this.manager.AddedLibraryItem -= this.manager_AddedLibraryItem;
+                    this.manager.RemovedLibraryItem -= this.manager_RemovedLibraryItem;
                     this.libTree.Nodes.Clear();
                 }
 
@@ -204,8 +204,8 @@ namespace Ima
                 //Process pre-existing
                 if (this.manager != null)
                 {
-                    this.manager.AddedLibraryItem += new OnLibraryItemEventHandler(manager_AddedLibraryItem);
-                    this.manager.RemovedLibraryItem += new OnLibraryItemEventHandler(manager_RemovedLibraryItem);
+                    this.manager.AddedLibraryItem += manager_AddedLibraryItem;
+                    this.manager.RemovedLibraryItem += manager_RemovedLibraryItem;
                     foreach (LibraryItem item in this.manager.Items)
                     {
                         this.AddItem(item);

@@ -64,7 +64,7 @@ namespace Ima.Controls
             if (imagewrapper != null)
             {
                 this.image = imagewrapper;
-                this.image.Changed += new ImageChangedEventHandler(OnOriginalBitmapChanged);
+                this.image.Changed += OnOriginalBitmapChanged;
             }
         }
         #endregion
@@ -94,7 +94,7 @@ namespace Ima.Controls
         {
             if (this.image != null)
             {
-                this.image.Changed -= new ImageChangedEventHandler(OnOriginalBitmapChanged);
+                this.image.Changed -= OnOriginalBitmapChanged;
             }
         }
 

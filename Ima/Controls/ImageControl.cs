@@ -100,7 +100,7 @@ namespace Ima.Controls
             // 
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.Name = "ImageControl";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.ImageControl_Paint);
+            this.Paint += this.ImageControl_Paint;
         }
         #endregion
 
@@ -329,10 +329,10 @@ namespace Ima.Controls
 
                 this.cursor = Cursor.Current;
                 this.control.Cursor = Cursors.Cross;
-                this.control.Paint += new PaintEventHandler(Selection_OnPaint);
-                this.control.MouseDown += new MouseEventHandler(Selection_MouseDown);
-                this.control.MouseUp += new MouseEventHandler(Selection_MouseUp);
-                this.control.MouseMove += new MouseEventHandler(Selection_MouseMove);
+                this.control.Paint += Selection_OnPaint;
+                this.control.MouseDown += Selection_MouseDown;
+                this.control.MouseUp += Selection_MouseUp;
+                this.control.MouseMove += Selection_MouseMove;
             }
 
             /// <summary>
@@ -340,10 +340,10 @@ namespace Ima.Controls
             /// </summary>
             public void End()
             {
-                this.control.MouseMove -= new MouseEventHandler(Selection_MouseMove);
-                this.control.MouseUp -= new MouseEventHandler(Selection_MouseUp);
-                this.control.MouseDown -= new MouseEventHandler(Selection_MouseDown);
-                this.control.Paint -= new PaintEventHandler(Selection_OnPaint);
+                this.control.MouseMove -= Selection_MouseMove;
+                this.control.MouseUp -= Selection_MouseUp;
+                this.control.MouseDown -= Selection_MouseDown;
+                this.control.Paint -= Selection_OnPaint;
                 this.control.Cursor = this.cursor;
                 this.cursor = null;
                 this.control.OnSelectionChanged(Rectangle.Empty);

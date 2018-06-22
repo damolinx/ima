@@ -99,7 +99,7 @@ namespace Ima
             this.btnFillcolor.Size = new System.Drawing.Size(101, 39);
             this.btnFillcolor.TabIndex = 8;
             this.btnFillcolor.UseVisualStyleBackColor = false;
-            this.btnFillcolor.Click += new System.EventHandler(this.btnFillcolor_Click);
+            this.btnFillcolor.Click += this.btnFillcolor_Click;
             // 
             // lblDegrees
             // 
@@ -129,7 +129,7 @@ namespace Ima
             this.udAngle.Size = new System.Drawing.Size(101, 29);
             this.udAngle.TabIndex = 6;
             this.udAngle.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.udAngle.ValueChanged += new System.EventHandler(this.udAngle_ValueChanged);
+            this.udAngle.ValueChanged += this.udAngle_ValueChanged;
             // 
             // cbCompound
             // 
@@ -148,7 +148,7 @@ namespace Ima
             this.cbCompound.Name = "cbCompound";
             this.cbCompound.Size = new System.Drawing.Size(245, 32);
             this.cbCompound.TabIndex = 4;
-            this.cbCompound.SelectedIndexChanged += new System.EventHandler(this.cbCompound_SelectedIndexChanged);
+            this.cbCompound.SelectedIndexChanged += this.cbCompound_SelectedIndexChanged;
             // 
             // rbCompound
             // 
@@ -157,7 +157,7 @@ namespace Ima
             this.rbCompound.Size = new System.Drawing.Size(187, 40);
             this.rbCompound.TabIndex = 3;
             this.rbCompound.Text = "&Compound";
-            this.rbCompound.CheckedChanged += new System.EventHandler(this.rbCompound_CheckedChanged);
+            this.rbCompound.CheckedChanged += this.rbCompound_CheckedChanged;
             // 
             // rbNormal
             // 
@@ -168,7 +168,7 @@ namespace Ima
             this.rbNormal.TabIndex = 0;
             this.rbNormal.TabStop = true;
             this.rbNormal.Text = "&No change";
-            this.rbNormal.CheckedChanged += new System.EventHandler(this.rbNormal_CheckedChanged);
+            this.rbNormal.CheckedChanged += this.rbNormal_CheckedChanged;
             // 
             // rbFlipHorizontal
             // 
@@ -177,7 +177,7 @@ namespace Ima
             this.rbFlipHorizontal.Size = new System.Drawing.Size(216, 41);
             this.rbFlipHorizontal.TabIndex = 1;
             this.rbFlipHorizontal.Text = "Flip &Horizontal";
-            this.rbFlipHorizontal.CheckedChanged += new System.EventHandler(this.rbFlipHorizontal_CheckedChanged);
+            this.rbFlipHorizontal.CheckedChanged += this.rbFlipHorizontal_CheckedChanged;
             // 
             // rbFlipVertical
             // 
@@ -186,7 +186,7 @@ namespace Ima
             this.rbFlipVertical.Size = new System.Drawing.Size(216, 41);
             this.rbFlipVertical.TabIndex = 2;
             this.rbFlipVertical.Text = "Flip &Vertical";
-            this.rbFlipVertical.CheckedChanged += new System.EventHandler(this.rbFlipVertical_CheckedChanged);
+            this.rbFlipVertical.CheckedChanged += this.rbFlipVertical_CheckedChanged;
             // 
             // rbRotate
             // 
@@ -195,7 +195,7 @@ namespace Ima
             this.rbRotate.Size = new System.Drawing.Size(360, 41);
             this.rbRotate.TabIndex = 5;
             this.rbRotate.Text = "Arbitrary &Rotate by:";
-            this.rbRotate.CheckedChanged += new System.EventHandler(this.rbRotate_CheckedChanged);
+            this.rbRotate.CheckedChanged += this.rbRotate_CheckedChanged;
             // 
             // btnOrigin
             // 
@@ -206,9 +206,9 @@ namespace Ima
             this.btnOrigin.Size = new System.Drawing.Size(14, 14);
             this.btnOrigin.TabIndex = 0;
             this.btnOrigin.Visible = false;
-            this.btnOrigin.VisibleChanged += new System.EventHandler(this.btnOrigin_VisibleChanged);
-            this.btnOrigin.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnOrigin_MouseMove);
-            this.btnOrigin.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnOrigin_MouseUp);
+            this.btnOrigin.VisibleChanged += this.btnOrigin_VisibleChanged;
+            this.btnOrigin.MouseMove += this.btnOrigin_MouseMove;
+            this.btnOrigin.MouseUp += this.btnOrigin_MouseUp;
             // 
             // FlipRotateWindow
             // 

@@ -119,8 +119,8 @@ namespace Ima
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About";
-            this.Closed += new System.EventHandler(this.AboutForm_Closed);
-            this.Load += new System.EventHandler(this.AboutForm_Load);
+            this.Closed += this.AboutForm_Closed;
+            this.Load += this.AboutForm_Load;
             this.ResumeLayout(false);
             this.PerformLayout();
 

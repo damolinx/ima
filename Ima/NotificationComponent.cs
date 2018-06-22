@@ -77,7 +77,7 @@ namespace Ima
             this.Controls.Add(this.zoomControl);
             this.Name = "NotificationComponent";
             this.Size = new System.Drawing.Size(512, 32);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.NotificationComponent_Paint);
+            this.Paint += this.NotificationComponent_Paint;
             this.ResumeLayout(false);
 
 		}

@@ -86,7 +86,7 @@ namespace Ima
             0,
             0,
             0});
-            this.udVerticalSize.ValueChanged += new System.EventHandler(this.udVerticalSize_ValueChanged);
+            this.udVerticalSize.ValueChanged += this.udVerticalSize_ValueChanged;
             // 
             // udHorizontalSize
             // 
@@ -111,7 +111,7 @@ namespace Ima
             0,
             0,
             0});
-            this.udHorizontalSize.ValueChanged += new System.EventHandler(this.udHorizontalSize_ValueChanged);
+            this.udHorizontalSize.ValueChanged += this.udHorizontalSize_ValueChanged;
             // 
             // label1
             // 
