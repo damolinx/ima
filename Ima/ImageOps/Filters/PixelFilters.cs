@@ -65,6 +65,7 @@ namespace Ima.ImageOps.Filters
     public class FilterGrayAdjusted : FilterBase
     {
         public FilterGrayAdjusted() : base("GrayScale") { this.Direct = true; }
+
         public unsafe override void Filter(PixelData* pPixel)
         {
             byte gray = (byte)(0.299 * pPixel->red + 0.587 * pPixel->green + 0.114 * pPixel->blue);

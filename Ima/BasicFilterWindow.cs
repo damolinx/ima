@@ -69,6 +69,9 @@ namespace Ima
             // 
             // lblHelp
             // 
+            this.lblHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHelp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblHelp.Location = new System.Drawing.Point(9, 454);
             this.lblHelp.Name = "lblHelp";
@@ -80,6 +83,7 @@ namespace Ima
             this.AutoScaleDimensions = new System.Drawing.SizeF(168F, 168F);
             this.ClientSize = new System.Drawing.Size(1000, 636);
             this.Controls.Add(this.lblHelp);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "BasicFilterWindow";
             this.Controls.SetChildIndex(this.lblHelp, 0);
             this.Controls.SetChildIndex(this.previewBox, 0);

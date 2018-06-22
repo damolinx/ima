@@ -42,7 +42,7 @@ namespace Ima
         private System.Windows.Forms.ToolBarButton tbBtn_Separator_1;
         private Ima.Controls.ImageControl imageControl;
         private System.Windows.Forms.ToolBarButton tbBtn_Color_Filter;
-        private System.Windows.Forms.ContextMenu cmenColorFilters;
+        private System.Windows.Forms.ContextMenu contextMenuColorFilters;
         private System.Windows.Forms.ToolBarButton tbBtn_CloseImage;
         private System.Windows.Forms.ToolBarButton tbBtn_Separator_2;
         private System.Windows.Forms.ToolBarButton tbBtn_Separator_3;
@@ -111,7 +111,7 @@ namespace Ima
             this.SetCurrentColorFilter(this.colorFilters.Length - 1);
             for (int i = 0; i < this.colorFilters.Length; i++)
             {
-                this.cmenColorFilters.MenuItems.Add(i, new ImageComponent.ColorFilterMenuItem(this, this.colorFilters[i]));
+                this.contextMenuColorFilters.MenuItems.Add(i, new ImageComponent.ColorFilterMenuItem(this, this.colorFilters[i]));
             }
         }
 
@@ -129,7 +129,7 @@ namespace Ima
             this.tbBtn_Selection = new System.Windows.Forms.ToolBarButton();
             this.imageControl = new Ima.Controls.ImageControl();
             this.tbBtn_Color_Filter = new System.Windows.Forms.ToolBarButton();
-            this.cmenColorFilters = new System.Windows.Forms.ContextMenu();
+            this.contextMenuColorFilters = new System.Windows.Forms.ContextMenu();
             this.tbBtn_CloseImage = new System.Windows.Forms.ToolBarButton();
             this.tbBtn_Separator_2 = new System.Windows.Forms.ToolBarButton();
             this.tbBtn_AutoFit = new System.Windows.Forms.ToolBarButton();
@@ -224,7 +224,7 @@ namespace Ima
             // 
             // tbBtn_Color_Filter
             // 
-            this.tbBtn_Color_Filter.DropDownMenu = this.cmenColorFilters;
+            this.tbBtn_Color_Filter.DropDownMenu = this.contextMenuColorFilters;
             this.tbBtn_Color_Filter.ImageIndex = 4;
             this.tbBtn_Color_Filter.Name = "tbBtn_Color_Filter";
             this.tbBtn_Color_Filter.Style = System.Windows.Forms.ToolBarButtonStyle.DropDownButton;
@@ -284,15 +284,16 @@ namespace Ima
                         {
                             this.status.ZoomEnable = false;
                         }
-                        //this.imageControl.Zoom = Math.Min(1.0, Math.Max(0.01, 
-                        //	Math.Floor(100.0 * Math.Min(((double)this.panel.Size.Width) / this.imageControl.Image.Width, 
-                        //	((double)this.panel.Size.Height) / this.imageControl.Image.Height)) / 100.0));
+
+                        this.imageControl.Zoom = Math.Min(1.0, Math.Max(0.01,
+                            Math.Floor(100.0 * Math.Min(((double)this.panel.Size.Width) / this.imageControl.Image.Width,
+                            ((double)this.panel.Size.Height) / this.imageControl.Image.Height)) / 100.0));
                     }
                     else
                     {
                         if (this.status != null)
                         {
-                            //TODO 0 -> to 1, otherise ValueChange is not risen
+                            //TODO 0 -> to 1, otherwise ValueChange is not raised
                             this.status.ZoomValue = 1;
                             this.status.ZoomEnable = true;
                             this.status.ZoomValue = 0;
