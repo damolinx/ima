@@ -56,10 +56,8 @@ namespace Ima.ImageOps
         public ImageWrapper(string filename)
         {
             this.Filename = filename;
-            using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                this.Bitmap = (Bitmap)Image.FromStream(stream);
-            }
+            var stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            this.Bitmap = (Bitmap)Image.FromStream(stream);
         }
 
         public ImageWrapper(string filename, Bitmap bitmap)
@@ -286,7 +284,7 @@ namespace Ima.ImageOps
         }
 
         /// <summary>
-        /// Saves internal image as a Bitmap
+        /// Saves internal image
         /// </summary>
         public void Save()
         {
@@ -296,11 +294,9 @@ namespace Ima.ImageOps
         /// <summary>
         /// Saves internal image
         /// </summary>
-        /// <param name="filename">string.Empty to use internal filename</param>
-        /// <param name="format">Image Format</param>
         public void Save(string filename, ImageFormat format)
         {
-            FileStream stream = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+            var stream = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
             this.Filename = filename;
             this.image.Save(stream, format);
             stream.Close();
