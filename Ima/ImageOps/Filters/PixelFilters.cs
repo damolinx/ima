@@ -1,10 +1,15 @@
-﻿using System;
+﻿using Ima.Utilites;
+using System;
 
 namespace Ima.ImageOps.Filters
 {
     public class FilterInvert : FilterBase
     {
-        public FilterInvert() : base("Invert") { this.Direct = true; }
+        public FilterInvert()
+            : base("Invert")
+        {
+        }
+
         public unsafe override void Filter(PixelData* pPixel)
         {
             pPixel->red = (byte)(255 - pPixel->red);
@@ -15,7 +20,10 @@ namespace Ima.ImageOps.Filters
 
     public class FilterRed : FilterBase
     {
-        public FilterRed() : base("Red") { this.Direct = true; }
+        public FilterRed()
+            : base("Red")
+        {
+        }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
@@ -27,7 +35,10 @@ namespace Ima.ImageOps.Filters
 
     public class FilterGreen : FilterBase
     {
-        public FilterGreen() : base("Green") { this.Direct = true; }
+        public FilterGreen()
+            : base("Green")
+        {
+        }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
@@ -39,7 +50,10 @@ namespace Ima.ImageOps.Filters
 
     public class FilterBlue : FilterBase
     {
-        public FilterBlue() : base("Blue") { this.Direct = true; }
+        public FilterBlue()
+            : base("Blue")
+        {
+        }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
@@ -51,7 +65,10 @@ namespace Ima.ImageOps.Filters
 
     public class FilterSepia : FilterBase
     {
-        public FilterSepia() : base("Sepia") { this.Direct = true; }
+        public FilterSepia()
+            : base("Sepia")
+        {
+        }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
@@ -64,7 +81,10 @@ namespace Ima.ImageOps.Filters
 
     public class FilterGrayAdjusted : FilterBase
     {
-        public FilterGrayAdjusted() : base("GrayScale") { this.Direct = true; }
+        public FilterGrayAdjusted()
+            : base("GrayScale")
+        {
+        }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
@@ -76,7 +96,10 @@ namespace Ima.ImageOps.Filters
     }
     public class FilterRedChannel : FilterBase
     {
-        public FilterRedChannel() : base("Red Channel") { this.Direct = true; }
+        public FilterRedChannel()
+            : base("Red Channel")
+        {
+        }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
@@ -87,7 +110,10 @@ namespace Ima.ImageOps.Filters
 
     public class FilterGreenChannel : FilterBase
     {
-        public FilterGreenChannel() : base("Green Channel") { this.Direct = true; }
+        public FilterGreenChannel()
+            : base("Green Channel")
+        {
+        }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
@@ -98,7 +124,10 @@ namespace Ima.ImageOps.Filters
 
     public class FilterBlueChannel : FilterBase
     {
-        public FilterBlueChannel() : base("Blue Channel") { this.Direct = true; }
+        public FilterBlueChannel()
+            : base("Blue Channel")
+        {
+        }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
@@ -109,169 +138,90 @@ namespace Ima.ImageOps.Filters
 
     public class FilterMean : FilterBase
     {
-        /// <summary>
-        /// Working array
-        /// </summary>
-        byte[] colors = new byte[5];
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public FilterMean() : base("Mean")
+        public FilterMean()
+            : base("Mean", inPlace: false)
         {
-            this.Direct = false;
             this.Border = 1;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="getPixel"></param>
-        /// <param name="pPixel"></param>
-        /// <param name="x0"></param>
-        /// <param name="y0"></param>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
         public unsafe override void Filter(int x, int y, PixelGet getPixel, PixelData* pPixel, int x0, int y0, int x1, int y1)
         {
-            PixelData* pPixelClone1, pPixelClone2, pPixelClone3, pPixelClone4;
-            pPixelClone1 = getPixel(x, y + 1);
-            pPixelClone2 = getPixel(x - 1, y);
-            pPixelClone3 = getPixel(x + 1, y);
-            pPixelClone4 = getPixel(x, y - 1);
-
-            colors[0] = pPixelClone1->red;
-            colors[1] = pPixelClone2->red;
-            colors[2] = pPixelClone3->red;
-            colors[3] = pPixelClone4->red;
-            colors[4] = pPixel->red;
-            Array.Sort(colors);
-            pPixel->red = colors[2];
-
-            colors[0] = pPixelClone1->green;
-            colors[1] = pPixelClone2->green;
-            colors[2] = pPixelClone3->green;
-            colors[3] = pPixelClone4->green;
-            colors[4] = pPixel->green;
-            Array.Sort(colors);
-            pPixel->green = colors[2];
-
-            colors[0] = pPixelClone1->blue;
-            colors[1] = pPixelClone2->blue;
-            colors[2] = pPixelClone3->blue;
-            colors[3] = pPixelClone4->blue;
-            colors[4] = pPixel->blue;
-            Array.Sort(colors);
-            pPixel->blue = colors[2];
-
+            var pPixel1 = getPixel(x, y + 1);
+            var pPixel2 = getPixel(x - 1, y);
+            var pPixel3 = getPixel(x + 1, y);
+            var pPixel4 = getPixel(x, y - 1);
+            pPixel->red = (byte)MathEx.Clamp((pPixel1->red + pPixel2->red + pPixel3->red + pPixel4->red + pPixel->red) / 5.0, 0, 255);
+            pPixel->green = (byte)MathEx.Clamp((pPixel1->green + pPixel2->green + pPixel3->green + pPixel4->green + pPixel->green) / 5.0, 0, 255);
+            pPixel->blue = (byte)MathEx.Clamp((pPixel1->blue + pPixel2->blue + pPixel3->blue + pPixel4->blue + pPixel->blue) / 5.0, 0, 255);
         }
     }
 
     public class FilterBlackWhite : ThresholdFilterBase
     {
-        public FilterBlackWhite() : base("Black/White")
+        private int _sqrThreshold;
+
+        public FilterBlackWhite()
+            : base("Black/White")
         {
             this.Maximum = 255;
             this.Minimum = 0;
             this.Threshold = 127;
-            this.Property = "B/W Threshold";
-            this.Direct = true;
+            this.PropertyName = "B/W Threshold";
+        }
+        public override int Threshold
+        {
+            get => base.Threshold;
+            set
+            {
+                base.Threshold = value;
+                _sqrThreshold = base.Threshold * base.Threshold;
+            }
         }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
             int distance = (255 - pPixel->red) * (255 - pPixel->red) + (255 - pPixel->green) * (255 - pPixel->green) + (255 - pPixel->blue) * (255 - pPixel->blue);
-            pPixel->red = pPixel->green = pPixel->blue = (distance <= (this.Threshold * this.Threshold)) ? (byte)255 : (byte)0;
+            pPixel->red = pPixel->green = pPixel->blue = (distance <= _sqrThreshold) ? (byte)255 : (byte)0;
         }
     }
 
-    public class FilterBrightness : ThresholdFilterBase
+    public class FilterBrightness
+        : ThresholdFilterBase
     {
-        public FilterBrightness() : base("Brightness")
+        public FilterBrightness()
+            : base("Brightness")
         {
             this.Maximum = 255;
             this.Minimum = -255;
-            this.Property = "Brightness";
-            this.Direct = true;
+            this.PropertyName = "Brightness";
         }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
-            int tmp;
-            tmp = pPixel->red + this.Threshold;
-            pPixel->red = (byte)((tmp >= 0) ? ((tmp <= 255) ? tmp : 255) : 0);
-
-            tmp = pPixel->green + this.Threshold;
-            pPixel->green = (byte)((tmp >= 0) ? ((tmp <= 255) ? tmp : 255) : 0);
-
-            tmp = pPixel->blue + this.Threshold;
-            pPixel->blue = (byte)((tmp >= 0) ? ((tmp <= 255) ? tmp : 255) : 0);
+            pPixel->red = (byte)MathEx.Clamp(pPixel->red + this.Threshold, 0, 255);
+            pPixel->green = (byte)MathEx.Clamp(pPixel->green + this.Threshold, 0, 255);
+            pPixel->blue = (byte)MathEx.Clamp(pPixel->blue + this.Threshold, 0, 255);
         }
     }
 
     public class FilterContrast : ThresholdFilterBase
     {
-        double fpContrast;
-        public FilterContrast() : base("Contrast")
+        public FilterContrast()
+            : base("Contrast")
         {
-            fpContrast = 0.0;
             this.Maximum = 100;
             this.Minimum = -100;
-            this.Property = "Contrast";
-            this.Direct = true;
+            this.PropertyName = "Contrast";
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public override int Threshold
-        {
-            get
-            {
-                return base.Threshold;
-            }
-
-            set
-            {
-                base.Threshold = value;
-                this.fpContrast = (this.Threshold + 100.0) / 100.0;
-                this.fpContrast *= this.fpContrast;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pPixel"></param>
         public unsafe override void Filter(PixelData* pPixel)
         {
-            double pixel;
+            double fpContrast = (this.Threshold + 100.0) / 100.0;
+            fpContrast *= fpContrast;
 
-            /* red */
-            pixel = pPixel->red * 1 / 255.0;
-            pixel -= 0.5;
-            pixel *= this.fpContrast;
-            pixel += 0.5;
-            pixel *= 255.0;
-            pPixel->red = (byte)((pixel >= 0) ? ((pixel <= 255) ? pixel : 255) : 0);
-
-            /* green */
-            pixel = pPixel->green * 1 / 255.0;
-            pixel -= 0.5;
-            pixel *= this.fpContrast;
-            pixel += 0.5;
-            pixel *= 255.0;
-            pPixel->green = (byte)((pixel >= 0) ? ((pixel <= 255) ? pixel : 255) : 0);
-
-            /* blue */
-            pixel = pPixel->blue * 1 / 255.0;
-            pixel -= 0.5;
-            pixel *= this.fpContrast;
-            pixel += 0.5;
-            pixel *= 255.0;
-            pPixel->blue = (byte)((pixel >= 0) ? ((pixel <= 255) ? pixel : 255) : 0);
+            pPixel->red = (byte)MathEx.Clamp(255 * ((fpContrast * ((pPixel->red * 1 / 255.0) - 0.5)) + 0.5), 0, 255);
+            pPixel->green = (byte)MathEx.Clamp(255 * ((fpContrast * ((pPixel->green * 1 / 255.0) - 0.5)) + 0.5), 0, 255);
+            pPixel->blue = (byte)MathEx.Clamp(255 * ((fpContrast * ((pPixel->blue * 1 / 255.0) - 0.5)) + 0.5), 0, 255);
         }
     }
 
@@ -287,13 +237,9 @@ namespace Ima.ImageOps.Filters
             this.Maximum = 100;
             this.Minimum = 1;
             this.Threshold = 20;
-            this.Property = "Gamma correction";
-            this.Direct = true;
+            this.PropertyName = "Gamma correction";
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public override int Threshold
         {
             get
@@ -327,10 +273,6 @@ namespace Ima.ImageOps.Filters
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pPixel"></param>
         public unsafe override void Filter(PixelData* pPixel)
         {
             pPixel->red = redGamma[pPixel->red];
@@ -341,54 +283,53 @@ namespace Ima.ImageOps.Filters
 
     public class FilterNoise : ThresholdFilterBase
     {
-        Random rand;
-        byte red = 255, green = 255, blue = 255;
+        private readonly Random rand;
 
-        public FilterNoise() : base("Random Noise")
+        public FilterNoise()
+            : base("Random Noise")
         {
-            this.Direct = true;
             rand = new Random();
             this.Minimum = 0;
             this.Maximum = 100;
-            this.Property = "Noise Density";
+            this.PropertyName = "Noise Density";
         }
 
         public FilterNoise(int seed) : base("Random Noise")
         {
-            this.Direct = true;
+            this.InPlace = true;
             rand = new Random(seed);
             this.Minimum = 0;
             this.Maximum = 100;
-            this.Property = "Noise Density";
+            this.PropertyName = "Noise Density";
         }
 
-        public void setNoiseColor(byte R, byte G, byte B)
+        public PixelData NoiseColor
         {
-            this.red = R;
-            this.green = G;
-            this.blue = B;
+            get; set;
         }
 
         public unsafe override void Filter(PixelData* pPixel)
         {
             if (rand.Next(this.Minimum, this.Maximum) <= this.Threshold)
             {
-                pPixel->red = red;
-                pPixel->green = green;
-                pPixel->blue = blue;
+                pPixel->red = NoiseColor.red;
+                pPixel->green = NoiseColor.green;
+                pPixel->blue = NoiseColor.blue;
             }
         }
     }
 
     public class FilterPosterize : ThresholdFilterBase
     {
-        byte[] lookup = new byte[256];
-        public FilterPosterize() : base("Posterize")
+        private byte[] _lookup;
+
+        public FilterPosterize()
+            : base("Posterize")
         {
+            _lookup = new byte[256];
             this.Maximum = 8;
             this.Minimum = 0;
-            this.Property = "Number of colors (2^n)";
-            this.Direct = true;
+            this.PropertyName = "Number of colors (2^n)";
             this.Threshold = 4;
         }
 
@@ -403,40 +344,34 @@ namespace Ima.ImageOps.Filters
             {
                 base.Threshold = value;
                 int pow = (int)Math.Pow(2, this.Threshold);
-                for (int i = 0; i < this.lookup.Length; i++)
+                for (int i = 0; i < _lookup.Length; i++)
                 {
-                    this.lookup[i] = (byte)(i - (i % pow));
+                    _lookup[i] = (byte)(i - (i % pow));
                 }
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pPixel"></param>
         public unsafe override void Filter(PixelData* pPixel)
         {
-            pPixel->red = this.lookup[pPixel->red];
-            pPixel->green = this.lookup[pPixel->green];
-            pPixel->blue = this.lookup[pPixel->blue];
+            pPixel->red = _lookup[pPixel->red];
+            pPixel->green = _lookup[pPixel->green];
+            pPixel->blue = _lookup[pPixel->blue];
         }
     }
 
     public class FilterSolarize : ThresholdFilterBase
     {
-        int pow;
-        public FilterSolarize() : base("Solarize")
+        private int _pow;
+
+        public FilterSolarize()
+            : base("Solarize")
         {
             this.Maximum = 8;
             this.Minimum = 0;
-            this.Property = "Number of colors (2^n)";
-            this.Direct = true;
+            this.PropertyName = "Number of colors (2^n)";
             this.Threshold = 8;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public override int Threshold
         {
             get
@@ -447,19 +382,15 @@ namespace Ima.ImageOps.Filters
             set
             {
                 base.Threshold = value;
-                this.pow = (int)Math.Pow(2, this.Threshold);
+                _pow = (int)Math.Pow(2, this.Threshold);
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pPixel"></param>
         public unsafe override void Filter(PixelData* pPixel)
         {
-            pPixel->red = (byte)((pPixel->red > this.pow) ? (255 - pPixel->red) : pPixel->red);
-            pPixel->green = (byte)((pPixel->green > this.pow) ? (255 - pPixel->green) : pPixel->green);
-            pPixel->blue = (byte)((pPixel->blue > this.pow) ? (255 - pPixel->blue) : pPixel->blue);
+            pPixel->red = (byte)MathEx.Clamp((pPixel->red > this._pow) ? (255 - pPixel->red) : pPixel->red, 0, 255);
+            pPixel->green = (byte)MathEx.Clamp((pPixel->green > this._pow) ? (255 - pPixel->green) : pPixel->green, 0, 255);
+            pPixel->blue = (byte)MathEx.Clamp((pPixel->blue > this._pow) ? (255 - pPixel->blue) : pPixel->blue, 0, 255);
         }
     }
 }

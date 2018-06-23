@@ -1,11 +1,13 @@
-﻿namespace Ima.ImageOps
+﻿using Ima.Utilites;
+
+namespace Ima.ImageOps
 {
     public abstract class ThresholdFilterBase : FilterBase
     {
         private int _threshold;
 
-        public ThresholdFilterBase(string name)
-            : base(name)
+        protected ThresholdFilterBase(string name, bool inPlace = true)
+            : base(name, inPlace)
         {
         }
 
@@ -13,22 +15,13 @@
         {
             get
             {
-                return this._threshold;
+                return _threshold;
             }
 
             set
             {
-                this._threshold = (value < this.Minimum)
-                    ? this.Minimum
-                    : (value > this.Maximum)
-                    ? this.Maximum
-                    : value;
+                _threshold = MathEx.Clamp(value, Minimum, Maximum);
             }
-        }
-
-        public int Minimum
-        {
-            get; protected set;
         }
 
         public int Maximum
@@ -36,7 +29,13 @@
             get; protected set;
         }
 
-        public string Property
+        public int Minimum
+        {
+            get; protected set;
+        }
+
+        //TODO: Convert to DescriptionAttribute
+        public string PropertyName
         {
             get; protected set;
         }

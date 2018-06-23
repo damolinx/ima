@@ -7,12 +7,11 @@ namespace Ima.ImageOps.Filters
         private int[] _matrix;
 
         public KernelFilterBase(int size, string name)
-            : base(name)
+            : base(name, false)
         {
-            this.Direct = false;
-            this.Property = "Matrix (2n + 1)";
-            this.Minimum = 0;
             this.Maximum = 5;
+            this.Minimum = 0;
+            this.PropertyName = "Matrix (2n + 1)";
             this.Threshold = size;
             this.Border = (this.Threshold - 1) / 2;
             this.Offset = 0;
@@ -23,12 +22,12 @@ namespace Ima.ImageOps.Filters
         {
             get
             {
-                return this._matrix;
+                return _matrix;
             }
             set
             {
-                this._matrix = value;
-                this.Threshold = (_matrix == null) ? 0 : _matrix.Length;
+                _matrix = value;
+                this.Threshold = _matrix?.Length ?? 0;
             }
         }
 
@@ -44,24 +43,21 @@ namespace Ima.ImageOps.Filters
 
         protected unsafe void applyConvolution3x3(int x, int y, PixelGet getPixel, PixelData* pPixel)
         {
-            PixelData* pPixelClone1, pPixelClone2, pPixelClone3, pPixelClone4, pPixelClone5,
-                pPixelClone6, pPixelClone7, pPixelClone8, pPixelClone9;
-
-            pPixelClone1 = getPixel(x - 1, y + 1);
-            pPixelClone2 = getPixel(x, y + 1);
-            pPixelClone3 = getPixel(x + 1, y + 1);
-            pPixelClone4 = getPixel(x - 1, y);
-            pPixelClone5 = getPixel(x, y);
-            pPixelClone6 = getPixel(x + 1, y);
-            pPixelClone7 = getPixel(x - 1, y - 1);
-            pPixelClone8 = getPixel(x, y - 1);
-            pPixelClone9 = getPixel(x + 1, y - 1);
+            var pPixelClone1 = getPixel(x - 1, y + 1);
+            var pPixelClone2 = getPixel(x, y + 1);
+            var pPixelClone3 = getPixel(x + 1, y + 1);
+            var pPixelClone4 = getPixel(x - 1, y);
+            var pPixelClone5 = getPixel(x, y);
+            var pPixelClone6 = getPixel(x + 1, y);
+            var pPixelClone7 = getPixel(x - 1, y - 1);
+            var pPixelClone8 = getPixel(x, y - 1);
+            var pPixelClone9 = getPixel(x + 1, y - 1);
 
             int tmp = Offset + (_matrix[0] * pPixelClone1->red + _matrix[1] * pPixelClone2->red + _matrix[2] * pPixelClone3->red
                 + _matrix[3] * pPixelClone4->red + _matrix[4] * pPixelClone5->red + _matrix[5] * pPixelClone6->red
                 + _matrix[6] * pPixelClone7->red + _matrix[7] * pPixelClone8->red + _matrix[8] * pPixelClone9->red) / Weight;
 
-            pPixel->red = (byte)((tmp >= 0) ? ((tmp <= 255) ? tmp : 255) : 0);
+            pPixel->red = (byte) ((tmp >= 0) ? ((tmp <= 255) ? tmp : 255) : 0);
 
             tmp = Offset + (_matrix[0] * pPixelClone1->green + _matrix[1] * pPixelClone2->green + _matrix[2] * pPixelClone3->green
                 + _matrix[3] * pPixelClone4->green + _matrix[4] * pPixelClone5->green + _matrix[5] * pPixelClone6->green
@@ -100,7 +96,7 @@ namespace Ima.ImageOps.Filters
         {
             this.Weight = 1;
             this.Offset = 127;
-            this.Property = "Color threshold";
+            this.PropertyName = "Color threshold";
             this.Minimum = 0;
             this.Maximum = 255;
             this.Threshold = 1;
@@ -137,7 +133,7 @@ namespace Ima.ImageOps.Filters
             this.Weight = 1;
             this.Offset = 0;
             this.Matrix = new int[] { 0 };
-            this.Property = "Color threshold";
+            this.PropertyName = "Color threshold";
             this.Minimum = 0;
             this.Maximum = 255;
             this.Threshold = 20;

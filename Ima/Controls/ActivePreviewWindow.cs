@@ -40,14 +40,8 @@ namespace Ima.Controls
                 (Bitmap)this.image.GetThumbnail(
                 (int)(rec.Width / factor),
                 (int)(rec.Height / factor), true));
-            this.preview.Changed += OnPreviewBitmapChanged;
 
             this.imageBox.Image = new Bitmap(this.preview.Bitmap);
-            this.previewBox.Image = this.preview.Bitmap;
-        }
-
-        public virtual void OnPreviewBitmapChanged(object sender, ImageChangedEventArgs args)
-        {
             this.previewBox.Image = this.preview.Bitmap;
         }
     }

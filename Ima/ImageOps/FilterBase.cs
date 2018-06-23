@@ -1,21 +1,16 @@
-﻿namespace Ima.ImageOps
+﻿using System;
+
+namespace Ima.ImageOps
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public abstract class FilterBase
     {
-        public FilterBase(string name)
+        protected FilterBase(string name, bool inPlace = true)
         {
-            this.Direct = true;
+            this.InPlace = inPlace;
             this.Name = name;
         }
 
-        public unsafe virtual void Filter(PixelData* pPixel) { }
-
-        public unsafe virtual void Filter(int x, int y, PixelGet getPixel, PixelData* pPixel, int x0, int y0, int x1, int y1) { }
-
-        public string Name
+        public int Border
         {
             get; protected set;
         }
@@ -25,14 +20,30 @@
             get; protected set;
         }
 
-        public bool Direct
+        public bool InPlace
         {
             get; protected set;
         }
 
-        public int Border
+        public string Name
         {
             get; protected set;
+        }
+
+        /// <summary>
+        /// In-place filter 
+        /// </summary>
+        public unsafe virtual void Filter(PixelData* pPixel)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Buffered filter 
+        /// </summary>
+        public unsafe virtual void Filter(int x, int y, PixelGet getPixel, PixelData* pPixel, int x0, int y0, int x1, int y1)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,7 +1,6 @@
 using Ima.ImageOps;
 using System;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace Ima.Controls
 {
@@ -72,8 +71,6 @@ namespace Ima.Controls
         /// <summary>
         /// If image is changed, this event allows to refresh view
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         public virtual void OnOriginalBitmapChanged(object sender, ImageChangedEventArgs args)
         {
             Rectangle rec = this.image.ActiveRegion;
@@ -81,28 +78,27 @@ namespace Ima.Controls
                 Math.Max(((double)rec.Width) / imageBox.Width,
                          ((double)rec.Height) / imageBox.Height));
 
-            this.imageBox.Image = this.image.GetThumbnail((int)(this.image.Width / factor),
-                                                                  (int)(this.image.Height / factor), true);
+            this.imageBox.Image = this.image.GetThumbnail(
+                (int)(this.image.Width / factor),
+                (int)(this.image.Height / factor), 
+                true);
         }
 
         /// <summary>
         /// Nice clean-up
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void PreviewForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (this.image != null)
             {
                 this.image.Changed -= OnOriginalBitmapChanged;
             }
+            GC.Collect();
         }
 
         /// <summary>
         /// Not-so-nice trick to generate the thumbnail in a lazy way
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected virtual void PreviewForm_VisibleChanged(object sender, System.EventArgs e)
         {
             if (!this.DesignMode)

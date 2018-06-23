@@ -244,6 +244,7 @@
     <Compile Include="UndoManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilites\MathEx.cs" />
     <Compile Include="ViewMode.cs" />
     <Compile Include="Wallpaper.cs">
       <SubType>Form</SubType>

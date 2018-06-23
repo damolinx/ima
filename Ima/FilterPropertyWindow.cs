@@ -141,7 +141,7 @@ namespace Ima
             OnOriginalBitmapChanged(this.image, null);
             unsafe
             {
-                if (this.filter.Direct)
+                if (this.filter.InPlace)
                 {
                     this.preview.Apply(this.filter.Name, new ImageDirectFilter(this.filter.Filter));
                 }
@@ -163,7 +163,7 @@ namespace Ima
             Cursor.Current = Cursors.WaitCursor;
             unsafe
             {
-                if (this.filter.Direct)
+                if (this.filter.InPlace)
                 {
                     this.image.Apply(filter.Name, new ImageDirectFilter(this.filter.Filter));
                 }

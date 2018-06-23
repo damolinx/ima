@@ -30,7 +30,7 @@ namespace Ima
             _pendingChanges = 0;
         }
 
-        public bool PendingChanges => this._pendingChanges > 0;
+        public bool PendingChanges => _pendingChanges > 0;
 
         /// <summary>
         /// Stores an Undo pair

@@ -4,51 +4,34 @@ namespace Ima.ImageOps.Filters
 {
     public class FilterPencil : ThresholdFilterBase
     {
-        private double _ratio;
-
-        public FilterPencil() 
-            : base("Pencil")
+        public FilterPencil()
+            : base("Pencil", false)
         {
             this.Maximum = 100;
             this.Minimum = 0;
-            this.Property = "Pen Strenght";
-            this.Direct = false;
+            this.PropertyName = "Pen Strenght";
             this.Border = 1;
             this.Threshold = 50;
         }
 
-        public override int Threshold
-        {
-            get
-            {
-                return base.Threshold;
-            }
-
-            set
-            {
-                base.Threshold = value;
-                this._ratio = this.Threshold / 100.0;
-            }
-        }
-
         public unsafe override void Filter(int x, int y, PixelGet getPixel, PixelData* pPixel, int x0, int y0, int x1, int y1)
         {
-            PixelData*[] pPixels;
-            double mask, max_diff, max_temp, grayscaled;
+            var ratio = this.Threshold / 100.0;
+            var grayscaled = 0.299 * pPixel->red + 0.587 * pPixel->green + 0.114 * pPixel->blue;
+            var max_diff = 0.0;
+            var max_temp = 0.0;
 
-            grayscaled = 0.299 * pPixel->red + 0.587 * pPixel->green + 0.114 * pPixel->blue;
-
-            pPixels = new PixelData*[8];
-            pPixels[0] = getPixel(x - 1, y + 1);
-            pPixels[1] = getPixel(x, y + 1);
-            pPixels[2] = getPixel(x + 1, y + 1);
-            pPixels[3] = getPixel(x - 1, y);
-            pPixels[4] = getPixel(x + 1, y);
-            pPixels[5] = getPixel(x - 1, y - 1);
-            pPixels[6] = getPixel(x, y - 1);
-            pPixels[7] = getPixel(x + 1, y - 1);
-
-            max_diff = 0;
+            var pPixels = new[]
+            {
+                getPixel(x - 1, y + 1),
+                getPixel(x, y + 1),
+                getPixel(x + 1, y + 1),
+                getPixel(x - 1, y),
+                getPixel(x + 1, y),
+                getPixel(x - 1, y - 1),
+                getPixel(x, y - 1),
+                getPixel(x + 1, y - 1)
+            };
 
             foreach (PixelData* pCurrent in pPixels)
             {
@@ -58,60 +41,44 @@ namespace Ima.ImageOps.Filters
                     max_diff = max_temp;
                 }
             }
-            mask = 1.0 / (max_diff / Math.Sqrt(grayscaled + 1.0) / 3.0 + 1.0);
-            pPixel->red = pPixel->green = pPixel->blue = (byte)(grayscaled + this._ratio * ((255 - grayscaled) * mask - max_diff * grayscaled / 100.0));
+            var mask = 1.0 / (max_diff / Math.Sqrt(grayscaled + 1.0) / 3.0 + 1.0);
+            pPixel->red = pPixel->green = pPixel->blue = (byte)(grayscaled + ratio * ((255 - grayscaled) * mask - max_diff * grayscaled / 100.0));
         }
     }
 
     public class FilterColoredPencil : ThresholdFilterBase
     {
-
-        private double _ratio;
-
-        public FilterColoredPencil() 
-            : base("Colored Pencil")
+        public FilterColoredPencil()
+            : base("Colored Pencil", false)
         {
             this.Maximum = 100;
             this.Minimum = 0;
-            this.Property = "Pen Strenght";
-            this.Direct = false;
+            this.PropertyName = "Pen Strenght";
             this.Border = 1;
             this.Threshold = 50;
         }
 
-        public override int Threshold
-        {
-            get
-            {
-                return base.Threshold;
-            }
-
-            set
-            {
-                base.Threshold = value;
-                _ratio = this.Threshold / 100.0;
-            }
-        }
-
         public unsafe override void Filter(int x, int y, PixelGet getPixel, PixelData* pPixel, int x0, int y0, int x1, int y1)
         {
-            PixelData*[] pPixels;
             double mask;
             int max_diff, max_temp;
+            var ratio = this.Threshold / 100.0;
 
-            pPixels = new PixelData*[8];
-            pPixels[0] = getPixel(x - 1, y + 1);
-            pPixels[1] = getPixel(x, y + 1);
-            pPixels[2] = getPixel(x + 1, y + 1);
-            pPixels[3] = getPixel(x - 1, y);
-            pPixels[4] = getPixel(x + 1, y);
-            pPixels[5] = getPixel(x - 1, y - 1);
-            pPixels[6] = getPixel(x, y - 1);
-            pPixels[7] = getPixel(x + 1, y - 1);
+            var pPixels = new[]
+            {
+                getPixel(x - 1, y + 1),
+                getPixel(x, y + 1),
+                getPixel(x + 1, y + 1),
+                getPixel(x - 1, y),
+                getPixel(x + 1, y),
+                getPixel(x - 1, y - 1),
+                getPixel(x, y - 1),
+                getPixel(x + 1, y - 1)
+            };
 
             ///Red
             max_diff = 0;
-            foreach (PixelData* pCurrent in pPixels)
+            foreach (var pCurrent in pPixels)
             {
                 max_temp = Math.Abs(pCurrent->red - pPixel->red);
                 if (max_temp > max_diff)
@@ -120,11 +87,11 @@ namespace Ima.ImageOps.Filters
                 }
             }
             mask = 1.0 / (max_diff / Math.Sqrt(pPixel->red + 1.0) / 3.0 + 1.0);
-            pPixel->red += (byte)(this._ratio * ((255 - pPixel->red) * mask - max_diff * pPixel->red / 100.0));
+            pPixel->red += (byte)(ratio * ((255 - pPixel->red) * mask - max_diff * pPixel->red / 100.0));
 
             ///Green
             max_diff = 0;
-            foreach (PixelData* pCurrent in pPixels)
+            foreach (var pCurrent in pPixels)
             {
                 max_temp = Math.Abs(pCurrent->green - pPixel->green);
                 if (max_temp > max_diff)
@@ -133,11 +100,11 @@ namespace Ima.ImageOps.Filters
                 }
             }
             mask = 1.0 / (max_diff / Math.Sqrt(pPixel->green + 1.0) / 3.0 + 1.0);
-            pPixel->green += (byte)(this._ratio * ((255 - pPixel->green) * mask - max_diff * pPixel->green / 100.0));
+            pPixel->green += (byte)(ratio * ((255 - pPixel->green) * mask - max_diff * pPixel->green / 100.0));
 
             ///Blue
             max_diff = 0;
-            foreach (PixelData* pCurrent in pPixels)
+            foreach (var pCurrent in pPixels)
             {
                 max_temp = Math.Abs(pCurrent->blue - pPixel->blue);
                 if (max_temp > max_diff)
@@ -146,18 +113,18 @@ namespace Ima.ImageOps.Filters
                 }
             }
             mask = 1.0 / (max_diff / Math.Sqrt(pPixel->blue + 1.0) / 3.0 + 1.0);
-            pPixel->blue += (byte)(this._ratio * ((255 - pPixel->blue) * mask - max_diff * pPixel->blue / 100.0));
+            pPixel->blue += (byte)(ratio * ((255 - pPixel->blue) * mask - max_diff * pPixel->blue / 100.0));
         }
     }
 
     public class FilterOil : ThresholdFilterBase
     {
-        public FilterOil() : base("Oil")
+        public FilterOil() 
+            : base("Oil", false)
         {
             this.Maximum = 5;
             this.Minimum = 1;
-            this.Property = "Brush Size";
-            this.Direct = false;
+            this.PropertyName = "Brush Size";
             this.Border = 1;
             this.Threshold = 3;
         }
@@ -176,7 +143,7 @@ namespace Ima.ImageOps.Filters
             }
         }
 
-        private unsafe int MostFrequent(PixelData*[] color)
+        private static unsafe int MostFrequent(PixelData*[] color)
         {
             int[] freq = new int[color.Length];
 
@@ -201,6 +168,7 @@ namespace Ima.ImageOps.Filters
                     maxIndex = i;
                 }
             }
+
             return maxIndex;
         }
 

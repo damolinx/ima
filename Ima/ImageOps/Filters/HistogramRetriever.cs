@@ -17,7 +17,7 @@ namespace Ima.ImageOps.Filters
         public HistogramRetriever()
             : base("Histogram Retriever")
         {
-            this.Direct = true;
+            this.InPlace = true;
         }
 
         public unsafe override void Filter(PixelData* pPixel)

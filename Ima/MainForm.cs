@@ -583,38 +583,50 @@ namespace Ima
 
         private void menuItem_Colors_BlackWhite_Click(object sender, EventArgs e)
         {
-            var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterBlackWhite());
-            window.ShowDialog(this);
+            using (var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterBlackWhite()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Colors_Invert_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterInvert());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterInvert()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Colors_Grayscale_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterGrayAdjusted());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterGrayAdjusted()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Colors_Redscale_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterRed());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterRed()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Colors_Greenscale_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterGreen());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterGreen()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Colors_Bluescale_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterBlue());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterBlue()))
+            {
+                window.ShowDialog(this);
+            }
         }
         #endregion
 
@@ -622,26 +634,34 @@ namespace Ima
 
         private void menuItem_Styles_ColoredPencils_Click(object sender, EventArgs e)
         {
-            var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterColoredPencil());
-            window.ShowDialog(this);
+            using (var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterColoredPencil()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Styles_FrostedGlass_Click(object sender, EventArgs e)
         {
-            var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterFrostedGlass());
-            window.ShowDialog(this);
+            using (var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterFrostedGlass()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Styles_OilPainting_Click(object sender, EventArgs e)
         {
-            var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterOil());
-            window.ShowDialog(this);
+            using (var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterOil()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Styles_Pencil_Click(object sender, EventArgs e)
         {
-            var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterPencil());
-            window.ShowDialog(this);
+            using (var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterPencil()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         #endregion
@@ -650,20 +670,26 @@ namespace Ima
 
         private void menuItem_Effects_Blur_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixBlur());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixBlur()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Effects_Sharpen_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixSharpen());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixSharpen()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Effects_Emboss_Click(object sender, EventArgs e)
         {
-            var window = new OffsetWindow(this.imageComponent.ImageWrapper, new FilterMatrixEmboss());
-            window.ShowDialog(this);
+            using (var window = new OffsetWindow(this.imageComponent.ImageWrapper, new FilterMatrixEmboss()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Effects_EdgeEnhance_Click(object sender, EventArgs e)
@@ -672,26 +698,34 @@ namespace Ima
 
         private void menuItem_Effects_ED_BW_Click(object sender, EventArgs e)
         {
-            var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterMatrixBW());
-            window.ShowDialog(this);
+            using (var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterMatrixBW()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItemEffects_ED_Kirsh_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixKirshED());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixKirshED()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Effects_ED_Prewitt_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixPrewittED());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixPrewittED()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Effects_ED_Sobel_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixSobelED());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMatrixSobelED()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Effects_Dilate_Click(object sender, EventArgs e)
@@ -711,20 +745,26 @@ namespace Ima
 
         private void menuItem_Effects_Posterize_Click(object sender, EventArgs e)
         {
-            var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterPosterize());
-            window.ShowDialog(this);
+            using (var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterPosterize()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Effects_Solarize_Click(object sender, EventArgs e)
         {
-            var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterSolarize());
-            window.ShowDialog(this);
+            using (var window = new ThresholdWindow(this.imageComponent.ImageWrapper, new FilterSolarize()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         private void menuItem_Effects_Mean_Click(object sender, EventArgs e)
         {
-            var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMean());
-            window.ShowDialog(this);
+            using (var window = new BasicFilterWindow(this.imageComponent.ImageWrapper, new FilterMean()))
+            {
+                window.ShowDialog(this);
+            }
         }
 
         #endregion

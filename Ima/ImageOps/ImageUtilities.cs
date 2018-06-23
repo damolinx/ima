@@ -33,5 +33,4 @@ namespace Ima.ImageOps
             return false;
         }
     }
-
 }

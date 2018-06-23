@@ -10,23 +10,23 @@ namespace Ima.ImageOps.Filters
         public FilterFrostedGlass() 
             : base("Frosted Glass")
         {
-            this.Direct = false;
+            this.InPlace = false;
             _rand = new Random();
             this.Minimum = 0;
             this.Maximum = 10;
             this.Threshold = 1;
-            this.Property = "Frost thickness";
+            this.PropertyName = "Frost thickness";
         }
 
         public FilterFrostedGlass(int seed) 
             : base("Frosted Glass")
         {
-            this.Direct = false;
+            this.InPlace = false;
             _rand = new Random(seed);
             this.Minimum = 0;
             this.Maximum = 10;
             this.Threshold = 1;
-            this.Property = "Frost thickness";
+            this.PropertyName = "Frost thickness";
         }
 
         public unsafe override void Filter(int x, int y, PixelGet getPixel, PixelData* pPixel, int x0, int y0, int x1, int y1)
@@ -49,13 +49,13 @@ namespace Ima.ImageOps.Filters
 
         public FilterRotate(double angle, Point center) : base("Rotation")
         {
-            this.Direct = false;
+            this.InPlace = false;
             this.Minimum = 0;
             this.Maximum = 359;
             this.Threshold = 0;
-            this.Property = "Angle";
-            this._center = center;
-            this._angle = 2.0 * Math.PI * angle / 360.0;
+            this.PropertyName = "Angle";
+            _center = center;
+            _angle = 2.0 * Math.PI * angle / 360.0;
             this.FillColor = Color.White;
         }
 
